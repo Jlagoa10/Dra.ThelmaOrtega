@@ -20,7 +20,7 @@
   content: '';
   position: absolute;
   inset: 12px;
-  border: 1px solid rgb(74 51 41 / 0.1);
+  border: 1px solid rgb(90 64 52 / 0.1);
   border-radius: calc(var(--radius-sm) - 4px);
   pointer-events: none;
 }

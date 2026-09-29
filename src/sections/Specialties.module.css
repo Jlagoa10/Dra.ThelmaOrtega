@@ -39,7 +39,7 @@
 
 .card:hover {
   transform: translateY(-4px);
-  border-color: rgb(192 99 63 / 0.28);
+  border-color: rgb(198 110 76 / 0.3);
   background: #fbf3ea;
   box-shadow: var(--shadow-soft);
 }

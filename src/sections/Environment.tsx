@@ -27,7 +27,7 @@ export function Environment() {
   return (
     <section id="ambiente" className={`section ${styles.environment}`} aria-labelledby="ambiente-title">
       <div className={`wrap ${styles.grid}`}>
-        <div className={styles.composition} data-reveal>
+        <div className={styles.composition} data-reveal="scale">
           <Media item={environment.main} className={styles.main} sizes="(max-width: 900px) 80vw, 45vw" />
           <Media item={environment.detail} className={styles.detail} sizes="(max-width: 900px) 45vw, 22vw" />
         </div>

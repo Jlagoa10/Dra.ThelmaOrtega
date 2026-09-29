@@ -1,5 +1,7 @@
 .support {
-  background: var(--cream);
+  background:
+    radial-gradient(38% 50% at 98% 34%, var(--glow), transparent 70%),
+    var(--cream);
 }
 
 .head {

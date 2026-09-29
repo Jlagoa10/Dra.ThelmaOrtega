@@ -1,6 +1,8 @@
 .profile {
   padding-top: clamp(64px, 8vw, 120px);
-  background: var(--cream);
+  background:
+    radial-gradient(38% 45% at 16% 46%, var(--glow), transparent 70%),
+    var(--cream);
 }
 
 .grid {

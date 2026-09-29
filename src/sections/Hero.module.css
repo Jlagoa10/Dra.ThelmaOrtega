@@ -1,4 +1,7 @@
 .hero {
+  /* Profundidade no scroll: deslocamento e escala máximos da ilustração. */
+  --depth-y: 56px;
+  --depth-scale: 1.03;
   /* Tamanho do palco (ver .stage), com a proporção da ilustração. */
   --stage-w: min(max(100vw, 100svh * 1.7768), 100vw / 0.36, 100svh * 2.47);
   --stage-h: calc(var(--stage-w) / 1.7768);
@@ -23,7 +26,33 @@
   width: var(--stage-w);
   height: var(--stage-h);
   transform: translate(-50%, -50%);
-  animation: heroImage 2.2s var(--ease-out) both;
+  animation: heroEnter 1.8s var(--ease-out) both;
+}
+
+.depth {
+  position: absolute;
+  inset: 0;
+}
+
+/* A ilustração desce um pouco mais devagar que a página ao rolar, criando
+   profundidade. Scroll-driven animation: roda fora da thread principal e não
+   usa JavaScript; navegadores sem suporte mostram a imagem parada. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .depth {
+      animation-name: heroDepth;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+  }
+}
+
+@keyframes heroDepth {
+  to {
+    transform: translateY(var(--depth-y)) scale(var(--depth-scale));
+  }
 }
 
 .image {
@@ -68,11 +97,24 @@
 }
 
 .name {
+  /* O padding (compensado pela margem) dá espaço às voltas da letra cursiva,
+     que ficariam cortadas pela máscara. */
+  margin: -0.14em -0.2em -0.3em;
+  padding: 0.14em 0.2em 0.3em;
   font-family: var(--font-script);
   font-weight: 400;
   font-size: clamp(4rem, calc(var(--stage-w) * 0.08), 10rem);
   line-height: 0.9;
-  animation: rise 1.4s var(--ease-out) 0.35s both;
+  /* Máscara em gradiente: o nome surge da esquerda para a direita, como escrito. */
+  -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+  mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+  -webkit-mask-size: 250% 100%;
+  mask-size: 250% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+  animation: nameReveal 1.7s var(--ease) 0.45s both;
 }
 
 .role {
@@ -83,27 +125,41 @@
   line-height: 1.5;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  animation: rise 1.4s var(--ease-out) 0.5s both;
+  animation: rise 1.2s var(--ease-out) 1.05s both;
 }
 
 .areas {
   margin-top: 6px;
   font-size: clamp(0.92rem, calc(var(--stage-w) * 0.0082), 1.12rem);
   letter-spacing: 0.06em;
-  animation: rise 1.4s var(--ease-out) 0.6s both;
+  animation: rise 1.2s var(--ease-out) 1.2s both;
 }
 
 .areas span {
   margin-inline: 0.45em;
 }
 
-/* Sem opacidade 0 no início: a ilustração é o LCP e precisa pintar de imediato. */
-@keyframes heroImage {
+@keyframes heroEnter {
   from {
-    transform: translate(-50%, -50%) scale(1.03);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.04);
   }
   to {
+    opacity: 1;
     transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes nameReveal {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+    transform: translateY(6px);
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+    transform: none;
   }
 }
 
@@ -122,6 +178,8 @@
    centralizada na primeira dobra. */
 @media (max-width: 767px) and (orientation: portrait) {
   .hero {
+    --depth-y: 20px;
+    --depth-scale: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -139,7 +197,7 @@
     flex: none;
     margin-block: calc(var(--stage-h) * -0.13) calc(var(--stage-h) * -0.08);
     transform: none;
-    animation-name: heroImageFlow;
+    animation-name: heroEnterFlow;
   }
 
   .name {
@@ -152,11 +210,13 @@
   }
 }
 
-@keyframes heroImageFlow {
+@keyframes heroEnterFlow {
   from {
-    transform: scale(1.03);
+    opacity: 0;
+    transform: scale(1.04);
   }
   to {
+    opacity: 1;
     transform: none;
   }
 }

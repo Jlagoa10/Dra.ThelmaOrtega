@@ -12,6 +12,7 @@ type Photo = Required<Pick<GalleryItem, 'image' | 'caption'>> & GalleryItem
 export function GalleryGrid({ items }: { items: GalleryItem[] }) {
   const photos = items.filter((item): item is Photo => Boolean(item.image))
   const [current, setCurrent] = useState<number | null>(null)
+  const [closing, setClosing] = useState(false)
   const dialogRef = useRef<HTMLDialogElement>(null)
   const touchStart = useRef<number | null>(null)
 
@@ -23,7 +24,20 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
     dialogRef.current?.showModal()
   }
 
-  const close = () => dialogRef.current?.close()
+  // Fecha com um fade curto (ou na hora, se o usuário preferir menos movimento).
+  const close = () => {
+    const dialog = dialogRef.current
+    if (!dialog?.open || closing) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      dialog.close()
+      return
+    }
+    setClosing(true)
+    window.setTimeout(() => {
+      dialog.close()
+      setClosing(false)
+    }, 260)
+  }
   const go = (delta: number) => setCurrent((index) => (index === null ? index : wrap(index + delta)))
 
   const onDialogClick = (event: MouseEvent<HTMLDialogElement>) => {
@@ -56,7 +70,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
     <>
       <ul className={styles.grid}>
         {items.map((item, index) => (
-          <li key={`${item.caption}-${index}`} className={styles.item} data-reveal>
+          <li key={`${item.caption}-${index}`} className={styles.item} data-reveal="scale">
             {item.image ? (
               <button
                 type="button"
@@ -89,7 +103,15 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
         ref={dialogRef}
         className={styles.lightbox}
         aria-label="Foto ampliada"
-        onClose={() => setCurrent(null)}
+        data-closing={closing || undefined}
+        onCancel={(event) => {
+          event.preventDefault()
+          close()
+        }}
+        onClose={() => {
+          setCurrent(null)
+          setClosing(false)
+        }}
         onClick={onDialogClick}
         onKeyDown={onKeyDown}
         onTouchStart={onTouchStart}

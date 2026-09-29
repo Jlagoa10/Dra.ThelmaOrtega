@@ -31,7 +31,7 @@ export function ButtonLink({
       href={href}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
     >
-      {icon && <Icon name={icon} />}
+      {icon && <Icon name={icon} className="btn__icon" />}
       <span>{children}</span>
       {trailingArrow && <Icon name="arrow" className="btn__arrow" size={18} />}
       {external && <span className="sr-only"> (abre em nova aba)</span>}

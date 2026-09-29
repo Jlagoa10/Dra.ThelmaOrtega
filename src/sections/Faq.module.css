@@ -1,5 +1,7 @@
 .faq {
-  background: var(--cream);
+  background:
+    linear-gradient(var(--paper), transparent var(--blend)),
+    var(--cream);
 }
 
 .grid {

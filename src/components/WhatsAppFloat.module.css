@@ -19,11 +19,11 @@
   visibility: hidden;
   transform: translateY(16px);
   transition:
-    opacity 0.45s var(--ease),
-    transform 0.45s var(--ease),
-    visibility 0s linear 0.45s,
-    background-color 0.3s var(--ease),
-    box-shadow 0.3s var(--ease);
+    opacity var(--dur-base) var(--ease),
+    transform var(--dur-base) var(--ease),
+    visibility 0s linear var(--dur-base),
+    background-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
 }
 
 .float[data-visible] {
@@ -31,40 +31,25 @@
   visibility: visible;
   transform: none;
   transition:
-    opacity 0.45s var(--ease),
-    transform 0.45s var(--ease),
+    opacity var(--dur-base) var(--ease),
+    transform var(--dur-base) var(--ease),
     visibility 0s,
-    background-color 0.3s var(--ease),
-    box-shadow 0.3s var(--ease);
+    background-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
 }
 
-/* Pulso discreto: só duas vezes, logo depois de aparecer. */
-.float::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-}
-
-.float[data-visible]::before {
-  animation: ring 2.4s var(--ease) 0.6s 2;
+.float svg {
+  transition: transform var(--dur-fast) var(--ease);
 }
 
 .float:hover {
   background: var(--accent-strong);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: 0 22px 40px -16px rgb(160 85 57 / 0.42);
 }
 
-@keyframes ring {
-  0% {
-    box-shadow: 0 0 0 0 rgb(245 165 131 / 0.55);
-  }
-  70%,
-  100% {
-    box-shadow: 0 0 0 14px rgb(245 165 131 / 0);
-  }
+.float:hover svg {
+  transform: translateX(2px);
 }
 
 @media (max-width: 640px) {

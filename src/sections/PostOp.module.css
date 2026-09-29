@@ -1,6 +1,21 @@
 .postop {
-  background: var(--cocoa-deep);
+  position: relative;
+  isolation: isolate;
   color: var(--on-dark-soft);
+  /* Os cantos arredondados do bloco escuro mostram o fundo das seções vizinhas. */
+  background: linear-gradient(var(--paper) 50%, var(--cream) 50%);
+}
+
+.postop::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: var(--curve);
+  background:
+    radial-gradient(55% 45% at 90% 6%, rgb(249 182 149 / 0.1), transparent 70%),
+    radial-gradient(45% 40% at 4% 96%, rgb(249 182 149 / 0.06), transparent 70%),
+    var(--cocoa-deep);
 }
 
 .head {
@@ -109,7 +124,15 @@
   stroke-dasharray: 4 7;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
-  transition: opacity 1s var(--ease);
+}
+
+.imaginedMask {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
 }
 
 .real {
@@ -120,16 +143,13 @@
   stroke-linejoin: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 0;
-  transition: stroke-dashoffset 2.4s var(--ease) 0.3s;
-}
-
-.area {
-  transition: opacity 1.2s var(--ease) 1.4s;
 }
 
 .dot,
-.dotEnd {
-  transition: opacity 0.6s var(--ease) var(--d);
+.dotEnd,
+.guide {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .dot {
@@ -144,16 +164,57 @@
   filter: drop-shadow(0 0 8px rgb(249 182 149 / 0.6));
 }
 
-/* Enquanto o gráfico não entra na tela, a curva real fica "por desenhar". */
-.chart:global(.is-pending) .real {
+/* Enquanto o gráfico não entra na tela, as curvas ficam "por desenhar".
+   Sem JS ou com movimento reduzido, nada disso se aplica e tudo aparece pronto. */
+.chart:global(.is-pending) .real,
+.chart:global(.is-pending) .imaginedMask {
   stroke-dashoffset: 1;
 }
 
 .chart:global(.is-pending) .area,
-.chart:global(.is-pending) .dot,
-.chart:global(.is-pending) .dotEnd,
-.chart:global(.is-pending) .imagined {
+.chart:global(.is-pending) .guide {
   opacity: 0;
+}
+
+.chart:global(.is-pending) .dot,
+.chart:global(.is-pending) .dotEnd {
+  opacity: 0;
+  transform: scale(0.4);
+}
+
+.chart:global(.is-pending) .stages li {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* As transições só existem depois da revelação: assim o estado "pendente"
+   é aplicado na hora, sem animar o gráfico "se apagando" fora da tela. */
+.chart:global(.is-revealed) .imaginedMask {
+  transition: stroke-dashoffset 1.4s var(--ease) 0.2s;
+}
+
+.chart:global(.is-revealed) .real {
+  /* easeInOutSine: combina com o cálculo de timeAt() no componente. */
+  transition: stroke-dashoffset var(--draw-dur) cubic-bezier(0.37, 0, 0.63, 1) var(--draw-start);
+}
+
+.chart:global(.is-revealed) .area {
+  transition: opacity 1.2s var(--ease) calc(var(--draw-start) + var(--draw-dur) * 0.8);
+}
+
+/* Pontos, guias e rótulos aparecem quando o traço chega até eles. */
+.chart:global(.is-revealed) .dot,
+.chart:global(.is-revealed) .dotEnd,
+.chart:global(.is-revealed) .guide {
+  transition:
+    opacity 0.6s var(--ease) calc(var(--draw-start) + var(--draw-dur) * var(--t)),
+    transform 0.6s var(--ease-out) calc(var(--draw-start) + var(--draw-dur) * var(--t));
+}
+
+.chart:global(.is-revealed) .stages li {
+  transition:
+    opacity 0.7s var(--ease) calc(var(--draw-start) + var(--draw-dur) * var(--t)),
+    transform 0.7s var(--ease-out) calc(var(--draw-start) + var(--draw-dur) * var(--t));
 }
 
 .stages {

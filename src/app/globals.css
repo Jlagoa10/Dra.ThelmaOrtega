@@ -38,8 +38,16 @@
   --section-y: clamp(88px, 11vw, 160px);
   --radius: 24px;
   --radius-sm: 14px;
+  --curve: clamp(28px, 5vw, 72px); /* cantos das seções em bloco */
+  --blend: clamp(140px, 16vw, 240px); /* altura da transição de cor entre seções */
+  --glow: rgb(249 182 149 / 0.1); /* brilho pêssego quase imperceptível */
+  /* Linguagem de movimento: poucas durações, easing suave, sem bounce. */
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 300ms; /* hover, foco, pequenos estados */
+  --dur-base: 500ms; /* trocas de imagem, overlays */
+  --dur-reveal: 850ms; /* entrada de blocos no scroll */
+  --reveal-y: 20px;
   --shadow-soft: 0 1px 2px rgb(90 64 52 / 0.04), 0 24px 48px -28px rgb(90 64 52 / 0.28);
 
   interpolate-size: allow-keywords;
@@ -255,15 +263,28 @@ p {
   text-decoration: none;
   cursor: pointer;
   transition:
-    transform 0.35s var(--ease),
-    background-color 0.35s var(--ease),
-    color 0.35s var(--ease),
-    border-color 0.35s var(--ease),
-    box-shadow 0.35s var(--ease);
+    transform var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
 }
 
 .btn svg {
   flex: none;
+}
+
+.btn:focus-visible {
+  outline-offset: 4px;
+}
+
+.btn__icon,
+.btn__arrow {
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.btn:hover .btn__icon {
+  transform: translateX(2px);
 }
 
 .btn:hover {
@@ -274,10 +295,6 @@ p {
 
 .btn:active {
   transform: translateY(0);
-}
-
-.btn__arrow {
-  transition: transform 0.35s var(--ease);
 }
 
 .btn:hover .btn__arrow {
@@ -333,12 +350,14 @@ p {
   font-weight: 600;
   color: var(--terra-ink);
   text-decoration: none;
-  transition: gap 0.35s var(--ease), color 0.35s var(--ease);
+  transition:
+    gap var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
 }
 
 .link-arrow span {
   background: linear-gradient(var(--accent), var(--accent)) 0 100% / 0 2px no-repeat;
-  transition: background-size 0.4s var(--ease);
+  transition: background-size var(--dur-base) var(--ease);
 }
 
 .link-arrow:hover {
@@ -349,16 +368,60 @@ p {
   background-size: 100% 2px;
 }
 
-/* ---------- Revelação no scroll ---------- */
-.reveal-on {
-  transition:
-    opacity 0.9s var(--ease-out),
-    transform 0.9s var(--ease-out);
-}
-
+/* ---------- Revelação no scroll ----------
+   Marque um elemento com `data-reveal` (sobe), `data-reveal="fade"`,
+   `data-reveal="scale"` ou `data-reveal="sequence"` (o container fica visível
+   e os filhos animam pelo CSS da seção). O RevealObserver só esconde o que
+   está abaixo da primeira tela e escalona os elementos que entram juntos.
+   Usa animation (e não transition) para não brigar com os hovers. */
 .is-pending {
   opacity: 0;
-  transform: translateY(24px);
+}
+
+[data-reveal='sequence'].is-pending {
+  opacity: 1;
+}
+
+.is-revealed {
+  animation: reveal-up var(--dur-reveal) var(--ease-out) var(--reveal-delay, 0ms) backwards;
+}
+
+[data-reveal='fade'].is-revealed {
+  animation-name: reveal-fade;
+}
+
+[data-reveal='scale'].is-revealed {
+  animation-name: reveal-scale;
+}
+
+[data-reveal='sequence'].is-revealed {
+  animation: none;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-y));
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+@media print {
+  .is-pending {
+    opacity: 1 !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -378,6 +441,5 @@ p {
 
   .is-pending {
     opacity: 1 !important;
-    transform: none !important;
   }
 }

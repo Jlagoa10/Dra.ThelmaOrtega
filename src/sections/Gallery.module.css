@@ -1,5 +1,7 @@
 .gallery {
-  background: var(--cream);
+  background:
+    linear-gradient(var(--sand), transparent var(--blend)),
+    var(--cream);
 }
 
 .head {

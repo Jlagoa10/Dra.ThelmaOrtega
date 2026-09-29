@@ -1,0 +1,139 @@
+.profile {
+  padding-top: clamp(64px, 8vw, 120px);
+  background: var(--cream);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(48px, 8vw, 120px);
+  align-items: center;
+}
+
+.figure {
+  position: relative;
+  max-width: 480px;
+  width: 100%;
+  justify-self: center;
+}
+
+.frameWrap {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Contorno em arco deslocado: dá profundidade sem sombra pesada. */
+.frameWrap::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 22px -22px -22px 22px;
+  border: 1px solid var(--nude);
+  border-radius: 999px 999px var(--radius) var(--radius);
+  pointer-events: none;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 999px 999px var(--radius) var(--radius);
+  background: var(--sand);
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+
+.caption {
+  margin-top: 44px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cocoa-soft);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 560px;
+}
+
+.copy p {
+  color: var(--cocoa-soft);
+}
+
+.title {
+  margin-block: -4px 4px;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: clamp(4rem, 7vw, 6rem);
+  line-height: 0.9;
+  color: var(--cocoa-deep);
+}
+
+.copy .highlight {
+  padding-left: 22px;
+  border-left: 1px solid var(--terra);
+  font-size: clamp(1.1rem, 1.4vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--terra-ink);
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 32px;
+  margin-top: 14px;
+}
+
+.pillars li {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--cocoa-deep);
+}
+
+.pillarIndex {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--terra-ink);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .figure {
+    max-width: 420px;
+  }
+
+  .copy {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .frameWrap::before {
+    inset: 14px -12px -14px 14px;
+  }
+
+  .caption {
+    margin-top: 34px;
+  }
+
+  .pillars {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

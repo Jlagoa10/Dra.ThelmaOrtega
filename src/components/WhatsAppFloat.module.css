@@ -1,0 +1,86 @@
+.float {
+  position: fixed;
+  right: clamp(16px, 2.4vw, 32px);
+  bottom: calc(clamp(16px, 2.4vw, 32px) + env(safe-area-inset-bottom, 0px));
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 24px 0 18px;
+  border-radius: 999px;
+  background: var(--terra-ink);
+  color: var(--paper);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 18px 36px -16px rgb(51 36 29 / 0.55);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition:
+    opacity 0.45s var(--ease),
+    transform 0.45s var(--ease),
+    visibility 0s linear 0.45s,
+    background-color 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+
+.float[data-visible] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 0.45s var(--ease),
+    transform 0.45s var(--ease),
+    visibility 0s,
+    background-color 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+
+/* Pulso discreto: só duas vezes, logo depois de aparecer. */
+.float::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.float[data-visible]::before {
+  animation: ring 2.4s var(--ease) 0.6s 2;
+}
+
+.float:hover {
+  background: var(--cocoa-deep);
+  transform: translateY(-3px);
+  box-shadow: 0 22px 40px -16px rgb(51 36 29 / 0.6);
+}
+
+@keyframes ring {
+  0% {
+    box-shadow: 0 0 0 0 rgb(154 77 51 / 0.35);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 14px rgb(154 77 51 / 0);
+  }
+}
+
+@media (max-width: 640px) {
+  .float {
+    width: 58px;
+    height: 58px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .float svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  .label {
+    display: none;
+  }
+}

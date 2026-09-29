@@ -67,6 +67,10 @@
   color: var(--terra-ink);
 }
 
+.question:hover .toggle {
+  border-color: var(--accent-strong);
+}
+
 .toggle {
   position: relative;
   flex: none;
@@ -100,14 +104,14 @@
 }
 
 .item[open] .toggle {
-  border-color: var(--terra-ink);
-  background: var(--terra-ink);
+  border-color: var(--accent);
+  background: var(--accent);
   transform: rotate(180deg);
 }
 
 .item[open] .toggle::before,
 .item[open] .toggle::after {
-  background: var(--paper);
+  background: var(--on-accent);
 }
 
 .item[open] .toggle::after {

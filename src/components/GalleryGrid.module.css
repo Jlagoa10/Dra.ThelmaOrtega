@@ -260,7 +260,7 @@
 }
 
 .control:focus-visible {
-  outline-color: var(--peach);
+  outline-color: var(--accent);
 }
 
 .close {

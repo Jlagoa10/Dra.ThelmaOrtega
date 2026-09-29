@@ -11,8 +11,8 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgb(249 239 229 / 0.8);
-  border-bottom: 1px solid var(--line);
+  background: rgb(249 239 229 / 0.82);
+  border-bottom: 1px solid rgb(249 182 149 / 0.55);
   -webkit-backdrop-filter: blur(14px) saturate(1.2);
   backdrop-filter: blur(14px) saturate(1.2);
   opacity: 0;
@@ -86,9 +86,10 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 4px;
-  height: 1px;
-  background: var(--terra);
+  bottom: 3px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s var(--ease);
@@ -100,7 +101,7 @@
 }
 
 .nav a[aria-current] {
-  color: var(--terra-ink);
+  color: var(--cocoa-deep);
 }
 
 .toggle {
@@ -119,8 +120,8 @@
 }
 
 .toggle:hover {
-  border-color: var(--cocoa);
-  background: var(--paper);
+  border-color: var(--accent-strong);
+  background: var(--accent-soft);
 }
 
 .toggle span,

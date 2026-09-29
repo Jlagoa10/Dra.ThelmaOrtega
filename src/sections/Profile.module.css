@@ -28,7 +28,7 @@
   position: absolute;
   z-index: -1;
   inset: 22px -22px -22px 22px;
-  border: 1px solid var(--nude);
+  border: 1px solid var(--accent);
   border-radius: 999px 999px var(--radius) var(--radius);
   pointer-events: none;
 }
@@ -79,7 +79,7 @@
 
 .copy .highlight {
   padding-left: 22px;
-  border-left: 1px solid var(--terra);
+  border-left: 2px solid var(--accent);
   font-size: clamp(1.1rem, 1.4vw, 1.25rem);
   line-height: 1.6;
   color: var(--terra-ink);

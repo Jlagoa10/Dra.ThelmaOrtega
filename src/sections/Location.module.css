@@ -30,7 +30,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--paper);
+  background: var(--accent-soft);
   color: var(--terra-ink);
 }
 
@@ -52,7 +52,7 @@
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background:
-    radial-gradient(circle at 50% 45%, var(--peach-soft) 0 6px, transparent 7px),
+    radial-gradient(circle at 50% 45%, var(--accent-soft) 0 6px, transparent 7px),
     linear-gradient(160deg, var(--cream), var(--sand-deep));
   box-shadow: var(--shadow-soft);
 }

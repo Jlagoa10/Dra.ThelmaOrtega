@@ -7,12 +7,16 @@
   --sand: #f5eadf;
   --sand-deep: #ecdccd;
   --nude: #e2c3ae;
-  --peach: #f4c9ac;
-  --peach-soft: #fae3d3;
-  --terra: #c66e4c; /* terracota claro: destaques grandes e decoração */
-  --terra-ink: #a05539; /* terracota para textos pequenos e botões (contraste AA) */
-  --terra-deep: #8a4a32;
-  --terra-bg: #eab89c; /* fundo da seção de contato */
+  /* Cor de destaque principal: botões, CTAs, detalhes do header e decoração.
+     É clara demais para texto sobre fundo claro (contraste 1,5): texto em
+     cima dela vai em marrom (--on-accent) e textos pequenos em --terra-ink. */
+  --accent: #f9b695;
+  --accent-strong: #f5a583;
+  --accent-soft: #fde6d9;
+  --on-accent: #4e3830;
+  --terra: #c66e4c; /* terracota: palavras de destaque grandes (Italianno) */
+  --terra-ink: #a05539; /* terracota mais escuro: textos pequenos e links (contraste AA) */
+  --terra-bg: #fdeee5; /* fundo da seção de contato: blush bem claro */
   --cocoa: #6a4e41;
   --cocoa-soft: #7d6254;
   --cocoa-deep: #5a4034;
@@ -121,7 +125,7 @@ address {
 }
 
 ::selection {
-  background: var(--peach-soft);
+  background: var(--accent-soft);
   color: var(--cocoa-deep);
 }
 
@@ -189,9 +193,9 @@ main:focus {
 .eyebrow::before {
   content: '';
   width: 32px;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.6;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
 }
 
 .title {
@@ -230,8 +234,8 @@ p {
 
 /* ---------- Botões ---------- */
 .btn {
-  --btn-bg: var(--terra-ink);
-  --btn-fg: var(--paper);
+  --btn-bg: var(--accent);
+  --btn-fg: var(--on-accent);
   --btn-bd: transparent;
   display: inline-flex;
   align-items: center;
@@ -263,9 +267,9 @@ p {
 }
 
 .btn:hover {
-  --btn-bg: var(--terra-deep);
+  --btn-bg: var(--accent-strong);
   transform: translateY(-2px);
-  box-shadow: 0 16px 30px -18px rgb(138 74 50 / 0.55);
+  box-shadow: 0 16px 30px -16px rgb(214 120 82 / 0.55);
 }
 
 .btn:active {
@@ -286,8 +290,8 @@ p {
 }
 
 .btn--light:hover {
-  --btn-bg: var(--terra-ink);
-  --btn-fg: var(--paper);
+  --btn-bg: var(--accent);
+  --btn-fg: var(--on-accent);
 }
 
 .btn--ghost {
@@ -297,8 +301,8 @@ p {
 }
 
 .btn--ghost:hover {
-  --btn-bg: var(--paper);
-  --btn-bd: var(--cocoa);
+  --btn-bg: var(--accent-soft);
+  --btn-bd: var(--accent-strong);
   box-shadow: none;
 }
 
@@ -333,7 +337,7 @@ p {
 }
 
 .link-arrow span {
-  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  background: linear-gradient(var(--accent), var(--accent)) 0 100% / 0 2px no-repeat;
   transition: background-size 0.4s var(--ease);
 }
 
@@ -342,7 +346,7 @@ p {
 }
 
 .link-arrow:hover span {
-  background-size: 100% 1px;
+  background-size: 100% 2px;
 }
 
 /* ---------- Revelação no scroll ---------- */

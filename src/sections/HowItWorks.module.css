@@ -26,7 +26,7 @@
   left: 28px;
   right: 0;
   height: 1px;
-  background: linear-gradient(to right, var(--line-strong) 78%, transparent);
+  background: linear-gradient(to right, var(--accent-strong) 78%, transparent);
   transform-origin: left;
   transition: transform 1.6s var(--ease) 0.3s;
 }
@@ -48,7 +48,7 @@
   width: 56px;
   height: 56px;
   margin-bottom: 14px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--accent-strong);
   border-radius: 50%;
   background: var(--sand);
   font-size: 0.92rem;
@@ -62,9 +62,9 @@
 }
 
 .step:hover .number {
-  border-color: var(--terra-ink);
-  background: var(--terra-ink);
-  color: var(--paper);
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 .stepTitle {
@@ -98,7 +98,7 @@
     right: auto;
     width: 1px;
     height: auto;
-    background: linear-gradient(var(--line-strong) 85%, transparent);
+    background: linear-gradient(var(--accent-strong) 85%, transparent);
     transform-origin: top;
   }
 

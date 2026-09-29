@@ -58,8 +58,8 @@ export function PostOp() {
               </desc>
               <defs>
                 <linearGradient id="chart-area" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stopColor="#f3c4a2" stopOpacity="0.22" />
-                  <stop offset="1" stopColor="#f3c4a2" stopOpacity="0" />
+                  <stop offset="0" stopColor="#f9b695" stopOpacity="0.22" />
+                  <stop offset="1" stopColor="#f9b695" stopOpacity="0" />
                 </linearGradient>
               </defs>
 
@@ -117,7 +117,6 @@ export function PostOp() {
             </p>
             <ButtonLink
               href={whatsappUrl('Olá, Dra. Thelma! Gostaria de tirar dúvidas sobre a fisioterapia no pós-operatório.')}
-              variant="light"
               icon="whatsapp"
               className={styles.cta}
             >

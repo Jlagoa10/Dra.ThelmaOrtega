@@ -18,7 +18,7 @@
 }
 
 .eyebrow {
-  color: var(--peach);
+  color: var(--accent);
 }
 
 .title {
@@ -26,7 +26,7 @@
 }
 
 .title :global(.script) {
-  color: var(--peach);
+  color: var(--accent);
 }
 
 .intro {
@@ -78,7 +78,7 @@
 }
 
 .swatchReal {
-  border-top: 2.5px solid var(--peach);
+  border-top: 2.5px solid var(--accent);
   border-radius: 2px;
 }
 
@@ -114,7 +114,7 @@
 
 .real {
   fill: none;
-  stroke: var(--peach);
+  stroke: var(--accent);
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -134,14 +134,14 @@
 
 .dot {
   fill: var(--cocoa-deep);
-  stroke: var(--peach);
+  stroke: var(--accent);
   stroke-width: 1.5;
   vector-effect: non-scaling-stroke;
 }
 
 .dotEnd {
-  fill: var(--peach);
-  filter: drop-shadow(0 0 8px rgb(243 196 162 / 0.6));
+  fill: var(--accent);
+  filter: drop-shadow(0 0 8px rgb(249 182 149 / 0.6));
 }
 
 /* Enquanto o gráfico não entra na tela, a curva real fica "por desenhar". */
@@ -176,17 +176,17 @@
   place-items: center;
   width: 26px;
   height: 26px;
-  border: 1px solid rgb(243 196 162 / 0.5);
+  border: 1px solid rgb(249 182 149 / 0.5);
   border-radius: 50%;
   font-size: 0.7rem;
   font-weight: 600;
-  color: var(--peach);
+  color: var(--accent);
   font-variant-numeric: tabular-nums;
 }
 
 .stages li:last-child .stageNumber {
-  border-color: var(--peach);
-  background: var(--peach);
+  border-color: var(--accent);
+  background: var(--accent);
   color: var(--cocoa-deep);
 }
 
@@ -220,7 +220,7 @@
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--peach);
+  color: var(--accent);
 }
 
 .processes {
@@ -243,7 +243,7 @@
 
 .note {
   padding-left: 20px;
-  border-left: 1px solid var(--peach);
+  border-left: 1px solid var(--accent);
   font-size: 1.08rem;
   line-height: 1.6;
   color: var(--on-dark);
@@ -280,7 +280,7 @@
     top: 16px;
     bottom: 16px;
     width: 1px;
-    background: linear-gradient(rgb(243 196 162 / 0.5), var(--peach));
+    background: linear-gradient(rgb(249 182 149 / 0.5), var(--accent));
   }
 
   .stages li {

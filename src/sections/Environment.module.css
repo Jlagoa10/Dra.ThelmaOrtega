@@ -50,8 +50,9 @@
 
 .rule {
   width: 56px;
-  height: 1px;
-  background: var(--terra);
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
 }
 
 @media (max-width: 900px) {

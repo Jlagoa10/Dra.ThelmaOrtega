@@ -1,7 +1,5 @@
 import Image from 'next/image'
 import heroFigure from '@/assets/images/hero-figura.webp'
-import { ButtonLink } from '@/components/ButtonLink'
-import { whatsappUrl } from '@/lib/links'
 import styles from './Hero.module.css'
 
 export function Hero() {
@@ -31,12 +29,6 @@ export function Hero() {
             Oncológica <span aria-hidden="true">·</span> Pós-parto
           </p>
         </div>
-      </div>
-
-      <div className={styles.ctaWrap}>
-        <ButtonLink href={whatsappUrl()} icon="whatsapp" className={styles.cta}>
-          Agendar avaliação
-        </ButtonLink>
       </div>
     </section>
   )

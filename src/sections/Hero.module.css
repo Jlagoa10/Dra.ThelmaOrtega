@@ -1,6 +1,5 @@
 .hero {
-  /* Tamanho do palco (ver .stage): definido aqui para o botão, que fica fora
-     do palco, também poder usar a medida. */
+  /* Tamanho do palco (ver .stage), com a proporção da ilustração. */
   --stage-w: min(max(100vw, 100svh * 1.7768), 100vw / 0.36, 100svh * 2.47);
   --stage-h: calc(var(--stage-w) / 1.7768);
   position: relative;
@@ -98,18 +97,6 @@
   margin-inline: 0.45em;
 }
 
-.ctaWrap {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: clamp(28px, 5.5svh, 64px);
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  padding-inline: var(--gutter);
-  animation: rise 1.4s var(--ease-out) 0.75s both;
-}
-
 /* Sem opacidade 0 no início: a ilustração é o LCP e precisa pintar de imediato. */
 @keyframes heroImage {
   from {
@@ -131,8 +118,8 @@
   }
 }
 
-/* Celular em pé: a ilustração entra no fluxo, a figura fica inteira
-   e o botão vem logo abaixo dela, sem um vão de creme vazio. */
+/* Celular em pé: a ilustração entra no fluxo e a figura fica inteira,
+   centralizada na primeira dobra. */
 @media (max-width: 767px) and (orientation: portrait) {
   .hero {
     display: flex;
@@ -150,14 +137,9 @@
     left: auto;
     top: auto;
     flex: none;
-    margin-top: calc(var(--stage-h) * -0.13);
+    margin-block: calc(var(--stage-h) * -0.13) calc(var(--stage-h) * -0.08);
     transform: none;
     animation-name: heroImageFlow;
-  }
-
-  .ctaWrap {
-    position: static;
-    margin-top: calc(var(--stage-h) * -0.12);
   }
 
   .name {

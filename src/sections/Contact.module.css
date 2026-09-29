@@ -2,9 +2,10 @@
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(90% 70% at 100% 0%, rgb(253 248 242 / 0.08), transparent 60%),
+    radial-gradient(90% 80% at 100% 0%, rgb(253 249 244 / 0.4), transparent 60%),
+    radial-gradient(70% 90% at 0% 100%, rgb(198 110 76 / 0.16), transparent 70%),
     var(--terra-bg);
-  color: var(--paper);
+  color: var(--cocoa-deep);
   isolation: isolate;
 }
 
@@ -15,7 +16,7 @@
   position: absolute;
   z-index: -1;
   aspect-ratio: 1;
-  border: 1px solid rgb(253 248 242 / 0.18);
+  border: 1px solid rgb(160 85 57 / 0.2);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -30,7 +31,7 @@
   right: -3vw;
   top: calc(min(22vw, 300px) * -0.5);
   width: min(22vw, 300px);
-  border-color: rgb(253 248 242 / 0.12);
+  border-color: rgb(160 85 57 / 0.14);
 }
 
 .grid {
@@ -48,7 +49,7 @@
 }
 
 .eyebrow {
-  color: var(--peach-soft);
+  color: var(--cocoa-deep);
 }
 
 .title {
@@ -56,7 +57,7 @@
   font-weight: 300;
   line-height: 1.08;
   letter-spacing: -0.03em;
-  color: var(--paper);
+  color: var(--cocoa-deep);
   text-wrap: balance;
 }
 
@@ -67,20 +68,20 @@
   font-size: 1.55em;
   line-height: 0.5;
   letter-spacing: 0;
-  color: var(--peach-soft);
+  color: var(--terra-ink);
 }
 
 .text {
   max-width: 30em;
   font-size: clamp(1.05rem, 1.4vw, 1.2rem);
   line-height: 1.65;
-  color: #fbe9dd;
+  color: var(--cocoa-deep);
 }
 
 .channels {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgb(253 248 242 / 0.25);
+  border-top: 1px solid rgb(90 64 52 / 0.22);
 }
 
 .channel {
@@ -88,7 +89,7 @@
   flex-direction: column;
   gap: 8px;
   padding-block: 24px;
-  border-bottom: 1px solid rgb(253 248 242 / 0.25);
+  border-bottom: 1px solid rgb(90 64 52 / 0.22);
 }
 
 .channelLabel {
@@ -99,7 +100,7 @@
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--peach-soft);
+  color: var(--cocoa-deep);
 }
 
 .phoneRow {
@@ -114,7 +115,7 @@
   font-weight: 300;
   line-height: 1.3;
   letter-spacing: -0.01em;
-  color: var(--paper);
+  color: var(--cocoa-deep);
   text-decoration: none;
   font-variant-numeric: lining-nums;
   background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
@@ -136,14 +137,14 @@
   gap: 8px;
   min-height: 40px;
   padding: 0 16px;
-  border: 1px solid rgb(253 248 242 / 0.4);
+  border: 1px solid rgb(90 64 52 / 0.35);
   border-radius: 999px;
   background: transparent;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--paper);
+  color: var(--cocoa-deep);
   cursor: pointer;
   transition:
     background-color 0.3s var(--ease),
@@ -151,18 +152,18 @@
 }
 
 .copyButton:hover {
-  border-color: var(--paper);
-  background: rgb(253 248 242 / 0.12);
+  border-color: var(--cocoa-deep);
+  background: rgb(253 249 244 / 0.45);
 }
 
 .copyButton[data-status='copied'] {
-  border-color: var(--paper);
-  background: var(--paper);
-  color: var(--terra-ink);
+  border-color: var(--cocoa-deep);
+  background: var(--cocoa-deep);
+  color: var(--paper);
 }
 
 .contact :focus-visible {
-  outline-color: var(--paper);
+  outline-color: var(--cocoa-deep);
 }
 
 @media (max-width: 900px) {

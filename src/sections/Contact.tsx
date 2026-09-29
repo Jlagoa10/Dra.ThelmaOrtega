@@ -18,7 +18,7 @@ export function Contact() {
             Converse com a Dra. Thelma e saiba como funciona o acompanhamento fisioterapêutico.
           </p>
           <div>
-            <ButtonLink href={whatsappUrl()} variant="light" icon="whatsapp">
+            <ButtonLink href={whatsappUrl()} icon="whatsapp">
               Agendar avaliação pelo WhatsApp
             </ButtonLink>
           </div>

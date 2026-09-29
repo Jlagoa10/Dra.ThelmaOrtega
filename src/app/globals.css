@@ -1,25 +1,29 @@
 /* ---------- Tokens ---------- */
 :root {
+  /* Paleta leve, tirada da própria ilustração do hero: off-white, pêssego,
+     terracota claro, nude quente e marrons suaves para texto. */
   --cream: #f9efe5; /* mesmo tom do fundo da ilustração do hero */
-  --paper: #fdf8f2;
-  --sand: #f2e5d7;
-  --sand-deep: #e8d5c2;
-  --nude: #d9b9a3;
-  --peach: #f3c4a2;
-  --peach-soft: #f8e0cd;
-  --terra: #c0633f;
-  --terra-ink: #9a4d33;
-  --terra-bg: #a4543a;
-  --cocoa: #4a3329;
-  --cocoa-soft: #6b5246;
-  --cocoa-deep: #33241d;
-  --cocoa-night: #261a15;
-  --on-dark: #f5eadf;
-  --on-dark-soft: #cdb8a6;
+  --paper: #fdf9f4;
+  --sand: #f5eadf;
+  --sand-deep: #ecdccd;
+  --nude: #e2c3ae;
+  --peach: #f4c9ac;
+  --peach-soft: #fae3d3;
+  --terra: #c66e4c; /* terracota claro: destaques grandes e decoração */
+  --terra-ink: #a05539; /* terracota para textos pequenos e botões (contraste AA) */
+  --terra-deep: #8a4a32;
+  --terra-bg: #eab89c; /* fundo da seção de contato */
+  --cocoa: #6a4e41;
+  --cocoa-soft: #7d6254;
+  --cocoa-deep: #5a4034;
+  --cocoa-night: #4e3830;
+  --on-dark: #f7ece2;
+  --on-dark-soft: #dcc6b5;
+  --hero-ink: #6e4638;
 
-  --line: rgb(74 51 41 / 0.14);
-  --line-strong: rgb(74 51 41 / 0.3);
-  --line-dark: rgb(245 234 223 / 0.14);
+  --line: rgb(90 64 52 / 0.14);
+  --line-strong: rgb(90 64 52 / 0.3);
+  --line-dark: rgb(247 236 226 / 0.16);
 
   --font-sans: var(--font-manrope), system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-script: var(--font-italianno), 'Brush Script MT', cursive;
@@ -32,7 +36,7 @@
   --radius-sm: 14px;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --shadow-soft: 0 1px 2px rgb(74 51 41 / 0.04), 0 24px 48px -28px rgb(74 51 41 / 0.3);
+  --shadow-soft: 0 1px 2px rgb(90 64 52 / 0.04), 0 24px 48px -28px rgb(90 64 52 / 0.28);
 
   interpolate-size: allow-keywords;
 }
@@ -259,9 +263,9 @@ p {
 }
 
 .btn:hover {
-  --btn-bg: var(--cocoa-deep);
+  --btn-bg: var(--terra-deep);
   transform: translateY(-2px);
-  box-shadow: 0 16px 30px -18px rgb(51 36 29 / 0.6);
+  box-shadow: 0 16px 30px -18px rgb(138 74 50 / 0.55);
 }
 
 .btn:active {
@@ -282,7 +286,7 @@ p {
 }
 
 .btn--light:hover {
-  --btn-bg: var(--cocoa-deep);
+  --btn-bg: var(--terra-ink);
   --btn-fg: var(--paper);
 }
 

@@ -1,5 +1,8 @@
 .location {
-  background: var(--sand);
+  background:
+    linear-gradient(var(--cream), transparent var(--blend)),
+    radial-gradient(40% 50% at 84% 58%, rgb(249 182 149 / 0.14), transparent 70%),
+    var(--sand);
 }
 
 .grid {

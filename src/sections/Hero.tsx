@@ -8,16 +8,19 @@ export function Hero() {
       {/* O "palco" tem a proporção da ilustração: o texto é posicionado em
           relação à figura, e não à tela, para ficar sempre sobre ela. */}
       <div className={styles.stage}>
-        <Image
-          src={heroFigure}
-          alt=""
-          fill
-          loading="eager"
-          fetchPriority="high"
-          quality={85}
-          sizes="(max-width: 767px) 280vw, (max-width: 1100px) 240vw, 115vw"
-          className={styles.image}
-        />
+        {/* Camada separada para a profundidade no scroll (só CSS). */}
+        <div className={styles.depth}>
+          <Image
+            src={heroFigure}
+            alt=""
+            fill
+            loading="eager"
+            fetchPriority="high"
+            quality={85}
+            sizes="(max-width: 767px) 280vw, (max-width: 1100px) 240vw, 115vw"
+            className={styles.image}
+          />
+        </div>
 
         <div className={styles.content}>
           <h1 id="hero-title" className={styles.title}>

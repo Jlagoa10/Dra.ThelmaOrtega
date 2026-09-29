@@ -1,5 +1,9 @@
 .specialties {
-  background: var(--paper);
+  /* Começa no creme do perfil e se dissolve no off-white. */
+  background:
+    linear-gradient(var(--cream), transparent var(--blend)),
+    radial-gradient(36% 40% at 94% 14%, var(--glow), transparent 70%),
+    var(--paper);
 }
 
 .head {
@@ -31,17 +35,35 @@
   border-radius: var(--radius);
   background: var(--cream);
   transition:
-    transform 0.5s var(--ease),
-    border-color 0.5s var(--ease),
-    box-shadow 0.5s var(--ease),
-    background-color 0.5s var(--ease);
+    transform var(--dur-base) var(--ease),
+    border-color var(--dur-base) var(--ease),
+    box-shadow var(--dur-base) var(--ease),
+    background-color var(--dur-base) var(--ease);
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  border-color: rgb(249 182 149 / 0.8);
-  background: #fbf3ea;
-  box-shadow: var(--shadow-soft);
+/* Hover só em telas com mouse (no toque ficaria "preso" depois do toque).
+   O mesmo destaque aparece quando o link do card recebe foco pelo teclado. */
+@media (hover: hover) {
+  .card:hover,
+  .card:has(:focus-visible) {
+    transform: translateY(-4px);
+    border-color: rgb(249 182 149 / 0.8);
+    background: #fcf4ec;
+    box-shadow:
+      0 2px 4px rgb(90 64 52 / 0.04),
+      0 30px 50px -32px rgb(160 85 57 / 0.38);
+  }
+
+  .card:hover .icon,
+  .card:has(:focus-visible) .icon {
+    background: var(--accent-soft);
+    border-color: var(--accent-strong);
+  }
+
+  .card:hover .icon svg,
+  .card:has(:focus-visible) .icon svg {
+    transform: translateY(-2px);
+  }
 }
 
 .cardTop {
@@ -60,13 +82,12 @@
   border-radius: 50%;
   color: var(--terra);
   transition:
-    background-color 0.5s var(--ease),
-    border-color 0.5s var(--ease);
+    background-color var(--dur-base) var(--ease),
+    border-color var(--dur-base) var(--ease);
 }
 
-.card:hover .icon {
-  background: var(--accent-soft);
-  border-color: var(--accent-strong);
+.icon svg {
+  transition: transform var(--dur-base) var(--ease);
 }
 
 .index {

@@ -71,7 +71,7 @@
 
 .image {
   object-fit: cover;
-  transition: transform 1.2s var(--ease);
+  transition: transform var(--dur-base) var(--ease);
 }
 
 .photo::after {
@@ -80,7 +80,7 @@
   inset: 0;
   background: linear-gradient(to top, rgb(78 56 48 / 0.55), transparent 45%);
   opacity: 0;
-  transition: opacity 0.5s var(--ease);
+  transition: opacity 400ms var(--ease);
 }
 
 .caption {
@@ -96,14 +96,14 @@
   text-align: left;
   color: var(--paper);
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(10px);
   transition:
-    opacity 0.5s var(--ease),
-    transform 0.5s var(--ease);
+    opacity 400ms var(--ease),
+    transform 400ms var(--ease);
 }
 
 .photo:hover .image {
-  transform: scale(1.035);
+  transform: scale(1.04);
 }
 
 .photo:hover::after,
@@ -167,8 +167,14 @@
   overflow: hidden;
 }
 
-.lightbox[open] {
-  animation: fade 0.3s var(--ease);
+.lightbox[open],
+.lightbox[open]::backdrop {
+  animation: fade 350ms var(--ease);
+}
+
+.lightbox[data-closing],
+.lightbox[data-closing]::backdrop {
+  animation: fadeOut 260ms var(--ease) forwards;
 }
 
 .lightbox::backdrop {
@@ -209,8 +215,14 @@
   border-radius: var(--radius-sm);
 }
 
+/* Abertura e troca de foto: fade com escala muito discreta. */
 .lbImage {
-  animation: fade 0.4s var(--ease);
+  animation: lbImageIn var(--dur-base) var(--ease-out);
+}
+
+.lightbox[data-closing] .lbImage {
+  transform: scale(0.98);
+  transition: transform 260ms var(--ease);
 }
 
 .lbImageHidden {
@@ -289,6 +301,19 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes lbImageIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
   }
 }
 

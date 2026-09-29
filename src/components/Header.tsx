@@ -14,6 +14,7 @@ export function Header() {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState<string | null>(null)
   const toggleRef = useRef<HTMLButtonElement>(null)
+  const sentinelRef = useRef<HTMLSpanElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
 
   const close = useCallback((returnFocus = false) => {
@@ -21,11 +22,13 @@ export function Header() {
     if (returnFocus) toggleRef.current?.focus()
   }, [])
 
+  // Estado "rolado" sem listener de scroll: observa um marcador no topo da página.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    const sentinel = sentinelRef.current
+    if (!sentinel) return
+    const observer = new IntersectionObserver(([entry]) => setScrolled(!entry.isIntersecting))
+    observer.observe(sentinel)
+    return () => observer.disconnect()
   }, [])
 
   // Destaca no menu a seção que está no meio da tela.
@@ -87,72 +90,75 @@ export function Header() {
   }, [])
 
   return (
-    <header className={styles.header} data-scrolled={scrolled || undefined} data-open={open || undefined}>
-      <div className={`wrap ${styles.bar}`}>
-        <a className={styles.brand} href="#inicio" onClick={() => close()}>
-          <span className={styles.brandName}>{site.name}</span>
-          <span className={styles.brandRole}>Fisioterapia</span>
-        </a>
+    <>
+      <span ref={sentinelRef} className={styles.sentinel} aria-hidden="true" />
+      <header className={styles.header} data-scrolled={scrolled || undefined} data-open={open || undefined}>
+        <div className={`wrap ${styles.bar}`}>
+          <a className={styles.brand} href="#inicio" onClick={() => close()}>
+            <span className={styles.brandName}>{site.name}</span>
+            <span className={styles.brandRole}>Fisioterapia</span>
+          </a>
 
-        <nav className={styles.nav} aria-label="Principal">
-          <ul>
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a href={link.href} aria-current={active === link.href ? 'true' : undefined}>
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          <nav className={styles.nav} aria-label="Principal">
+            <ul>
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} aria-current={active === link.href ? 'true' : undefined}>
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <ButtonLink href={whatsappUrl()} size="small" className={styles.cta}>
-          Agendar avaliação
-        </ButtonLink>
+          <ButtonLink href={whatsappUrl()} size="small" className={styles.cta}>
+            Agendar avaliação
+          </ButtonLink>
 
-        <button
-          ref={toggleRef}
-          type="button"
-          className={styles.toggle}
-          aria-expanded={open}
-          aria-controls="menu-mobile"
-          aria-label={open ? 'Fechar menu' : 'Abrir menu'}
-          onClick={() => setOpen((value) => !value)}
+          <button
+            ref={toggleRef}
+            type="button"
+            className={styles.toggle}
+            aria-expanded={open}
+            aria-controls="menu-mobile"
+            aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+            onClick={() => setOpen((value) => !value)}
+          >
+            <span aria-hidden="true" />
+          </button>
+        </div>
+
+        <div
+          id="menu-mobile"
+          ref={panelRef}
+          className={styles.panel}
+          inert={!open}
         >
-          <span aria-hidden="true" />
-        </button>
-      </div>
-
-      <div
-        id="menu-mobile"
-        ref={panelRef}
-        className={styles.panel}
-        inert={!open}
-      >
-        <nav aria-label="Menu" className={`wrap ${styles.panelInner}`}>
-          <ol className={styles.panelLinks}>
-            {navLinks.map((link, index) => (
-              <li key={link.href} style={{ '--i': index } as CSSProperties}>
-                <a href={link.href} onClick={() => close()}>
-                  <span className={styles.panelIndex} aria-hidden="true">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ol>
-          <div className={styles.panelFoot}>
-            <ButtonLink href={whatsappUrl()} icon="whatsapp">
-              Agendar avaliação pelo WhatsApp
-            </ButtonLink>
-            <a className={styles.panelSocial} href={site.instagram.url} target="_blank" rel="noopener noreferrer">
-              <Icon name="instagram" size={18} />
-              {site.instagram.handle}
-            </a>
-          </div>
-        </nav>
-      </div>
-    </header>
+          <nav aria-label="Menu" className={`wrap ${styles.panelInner}`}>
+            <ol className={styles.panelLinks}>
+              {navLinks.map((link, index) => (
+                <li key={link.href} style={{ '--i': index } as CSSProperties}>
+                  <a href={link.href} onClick={() => close()}>
+                    <span className={styles.panelIndex} aria-hidden="true">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ol>
+            <div className={styles.panelFoot}>
+              <ButtonLink href={whatsappUrl()} icon="whatsapp">
+                Agendar avaliação pelo WhatsApp
+              </ButtonLink>
+              <a className={styles.panelSocial} href={site.instagram.url} target="_blank" rel="noopener noreferrer">
+                <Icon name="instagram" size={18} />
+                {site.instagram.handle}
+              </a>
+            </div>
+          </nav>
+        </div>
+      </header>
+    </>
   )
 }

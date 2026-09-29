@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { ButtonLink } from '@/components/ButtonLink'
 import { steps } from '@/data/content'
 import { whatsappUrl } from '@/lib/links'
@@ -14,9 +15,9 @@ export function HowItWorks() {
           </h2>
         </header>
 
-        <ol className={styles.steps} data-reveal>
+        <ol className={styles.steps} data-reveal="sequence">
           {steps.map((step, index) => (
-            <li key={step.title} className={styles.step}>
+            <li key={step.title} className={styles.step} style={{ '--i': index } as CSSProperties}>
               <span className={styles.number} aria-hidden="true">
                 {String(index + 1).padStart(2, '0')}
               </span>

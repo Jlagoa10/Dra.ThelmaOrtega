@@ -19,6 +19,15 @@ const realPath =
   'M50 210 C58.3 214.3 83.3 229.3 100 236 C116.7 242.7 133.3 250.7 150 250 C166.7 249.3 183.3 236.3 200 232 C216.7 227.7 235.8 224.3 250 224 C264.2 223.7 273.3 233 285 230 C296.7 227 309.2 213 320 206 C330.8 199 338.3 192.7 350 188 C361.7 183.3 378.3 181.7 390 178 C401.7 174.3 410 173.7 420 166 C430 158.3 438.7 140.3 450 132 C461.3 123.7 476.7 121.3 488 116 C499.3 110.7 507.7 107.3 518 100 C528.3 92.7 544.7 76.7 550 72'
 const imaginedPath = 'M50 210 C130 96 250 74 550 72'
 
+// Sequência da animação: a curva idealizada é traçada primeiro; a real começa
+// em DRAW_START e leva DRAW_DURATION. Pontos e etapas acompanham o traço.
+const DRAW_START = 1
+const DRAW_DURATION = 2.4
+// A curva real usa easing senoidal (ver .real no CSS); o momento em que o traço
+// passa por cada etapa é o inverso dessa curva, para pontos e rótulos surgirem
+// junto com a linha.
+const timeAt = (x: number) => Math.acos(1 - 2 * ((x - 50) / 500)) / Math.PI
+
 export function PostOp() {
   return (
     <section id="pos-operatorio" className={`section ${styles.postop}`} aria-labelledby="posop-title">
@@ -37,7 +46,11 @@ export function PostOp() {
         </header>
 
         <div className={styles.grid}>
-          <figure className={styles.chart} data-reveal>
+          <figure
+            className={styles.chart}
+            data-reveal
+            style={{ '--draw-start': `${DRAW_START}s`, '--draw-dur': `${DRAW_DURATION}s` } as CSSProperties}
+          >
             <div className={styles.legend} aria-hidden="true">
               <span>
                 <i className={styles.swatchImagined} />
@@ -61,14 +74,27 @@ export function PostOp() {
                   <stop offset="0" stopColor="#f9b695" stopOpacity="0.22" />
                   <stop offset="1" stopColor="#f9b695" stopOpacity="0" />
                 </linearGradient>
+                {/* A curva idealizada é tracejada: para "desenhá-la", uma máscara
+                    com um traço contínuo vai revelando o tracejado. */}
+                <mask id="imagined-reveal" maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="300">
+                  <path d={imaginedPath} pathLength={1} className={styles.imaginedMask} />
+                </mask>
               </defs>
 
               {stagePoints.map(([x, y]) => (
-                <line key={x} x1={x} y1={BASELINE} x2={x} y2={y} className={styles.guide} />
+                <line
+                  key={x}
+                  x1={x}
+                  y1={BASELINE}
+                  x2={x}
+                  y2={y}
+                  className={styles.guide}
+                  style={{ '--t': timeAt(x) } as CSSProperties}
+                />
               ))}
               <line x1="30" y1={BASELINE} x2="575" y2={BASELINE} className={styles.axis} />
 
-              <path d={imaginedPath} className={styles.imagined} />
+              <path d={imaginedPath} className={styles.imagined} mask="url(#imagined-reveal)" />
               <path d={`${realPath} L550 ${BASELINE} L50 ${BASELINE} Z`} className={styles.area} fill="url(#chart-area)" />
               <path d={realPath} pathLength={1} className={styles.real} />
 
@@ -79,14 +105,14 @@ export function PostOp() {
                   cy={y}
                   r={index === stagePoints.length - 1 ? 7 : 4.5}
                   className={index === stagePoints.length - 1 ? styles.dotEnd : styles.dot}
-                  style={{ '--d': `${0.5 + index * 0.3}s` } as CSSProperties}
+                  style={{ '--t': timeAt(x) } as CSSProperties}
                 />
               ))}
             </svg>
 
             <ol className={styles.stages} aria-label="Etapas da recuperação">
               {postOp.stages.map((stage, index) => (
-                <li key={stage}>
+                <li key={stage} style={{ '--t': timeAt(stagePoints[index][0]) } as CSSProperties}>
                   <span className={styles.stageNumber} aria-hidden="true">
                     {index + 1}
                   </span>

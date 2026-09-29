@@ -36,7 +36,7 @@ export function Location() {
           </div>
         </div>
 
-        <div className={styles.map} data-reveal>
+        <div className={styles.map} data-reveal="fade">
           <iframe
             src={mapsEmbedUrl}
             title={`Mapa: ${street}, ${district}, ${city} - ${state}`}

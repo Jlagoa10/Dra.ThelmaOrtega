@@ -1,8 +1,20 @@
 .footer {
-  background: var(--cocoa-night);
+  position: relative;
+  isolation: isolate;
+  /* Cantos superiores curvos: por trás deles aparece o fundo do contato. */
+  background: var(--terra-bg);
   color: var(--on-dark-soft);
   padding-block: clamp(64px, 8vw, 104px) 32px;
   font-size: 0.95rem;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: var(--curve) var(--curve) 0 0;
+  background: var(--cocoa-night);
 }
 
 .grid {

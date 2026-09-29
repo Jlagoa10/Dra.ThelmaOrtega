@@ -1,5 +1,7 @@
 .how {
-  background: var(--sand);
+  background:
+    linear-gradient(var(--cream), transparent var(--blend)),
+    var(--sand);
 }
 
 .head {
@@ -28,11 +30,60 @@
   height: 1px;
   background: linear-gradient(to right, var(--accent-strong) 78%, transparent);
   transform-origin: left;
-  transition: transform 1.6s var(--ease) 0.3s;
 }
 
 .steps:global(.is-pending)::before {
   transform: scaleX(0);
+}
+
+/* Transição só depois da revelação, para o estado pendente não ser animado. */
+.steps:global(.is-revealed)::before {
+  transition: transform 1.8s var(--ease) calc(var(--reveal-delay, 0ms) + 0.2s);
+}
+
+/* Sequência de entrada (uma vez): cada etapa surge quando a linha chega nela
+   e o círculo ganha um halo pêssego que se dissolve. */
+.steps:global(.is-pending) .step > * {
+  opacity: 0;
+}
+
+.steps:global(.is-revealed) .step > * {
+  animation: stepIn 0.8s var(--ease-out) calc(var(--reveal-delay, 0ms) + 0.25s + var(--i) * 0.38s) backwards;
+}
+
+.steps:global(.is-revealed) .stepTitle {
+  animation-delay: calc(var(--reveal-delay, 0ms) + 0.33s + var(--i) * 0.38s);
+}
+
+.steps:global(.is-revealed) .stepText {
+  animation-delay: calc(var(--reveal-delay, 0ms) + 0.41s + var(--i) * 0.38s);
+}
+
+.steps:global(.is-revealed) .number {
+  animation:
+    stepIn 0.8s var(--ease-out) calc(var(--reveal-delay, 0ms) + 0.25s + var(--i) * 0.38s) backwards,
+    stepGlow 1.4s var(--ease) calc(var(--reveal-delay, 0ms) + 0.4s + var(--i) * 0.38s);
+}
+
+@keyframes stepIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes stepGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgb(249 182 149 / 0);
+  }
+  40% {
+    border-color: var(--accent);
+    background-color: var(--accent-soft);
+    box-shadow: 0 0 0 8px rgb(249 182 149 / 0.32);
+  }
+  100% {
+    box-shadow: 0 0 0 14px rgb(249 182 149 / 0);
+  }
 }
 
 .step {
@@ -56,9 +107,9 @@
   color: var(--terra-ink);
   font-variant-numeric: tabular-nums;
   transition:
-    background-color 0.4s var(--ease),
-    color 0.4s var(--ease),
-    border-color 0.4s var(--ease);
+    background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
 }
 
 .step:hover .number {

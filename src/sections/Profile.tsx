@@ -9,7 +9,7 @@ export function Profile() {
   return (
     <section id="perfil" className={`section ${styles.profile}`} aria-labelledby="perfil-title">
       <div className={`wrap ${styles.grid}`}>
-        <figure className={styles.figure} data-reveal>
+        <figure className={styles.figure} data-reveal="scale">
           <div className={styles.frameWrap}>
             <div className={styles.frame}>
               <Image

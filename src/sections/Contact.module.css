@@ -1,0 +1,180 @@
+.contact {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(90% 70% at 100% 0%, rgb(253 248 242 / 0.08), transparent 60%),
+    var(--terra-bg);
+  color: var(--paper);
+  isolation: isolate;
+}
+
+/* Círculos de traço fino: eco das formas arredondadas da ilustração do hero. */
+.contact::before,
+.contact::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  aspect-ratio: 1;
+  border: 1px solid rgb(253 248 242 / 0.18);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.contact::before {
+  right: -10vw;
+  top: calc(min(34vw, 460px) * -0.62);
+  width: min(34vw, 460px);
+}
+
+.contact::after {
+  right: -3vw;
+  top: calc(min(22vw, 300px) * -0.5);
+  width: min(22vw, 300px);
+  border-color: rgb(253 248 242 / 0.12);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: clamp(48px, 7vw, 112px);
+  align-items: end;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 26px;
+}
+
+.eyebrow {
+  color: var(--peach-soft);
+}
+
+.title {
+  font-size: clamp(2.6rem, 5.4vw, 4.6rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--paper);
+  text-wrap: balance;
+}
+
+.script {
+  font-family: var(--font-script);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.55em;
+  line-height: 0.5;
+  letter-spacing: 0;
+  color: var(--peach-soft);
+}
+
+.text {
+  max-width: 30em;
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  line-height: 1.65;
+  color: #fbe9dd;
+}
+
+.channels {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgb(253 248 242 / 0.25);
+}
+
+.channel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-block: 24px;
+  border-bottom: 1px solid rgb(253 248 242 / 0.25);
+}
+
+.channelLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--peach-soft);
+}
+
+.phoneRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+}
+
+.channelValue {
+  font-size: clamp(1.4rem, 2.3vw, 1.85rem);
+  font-weight: 300;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  text-decoration: none;
+  font-variant-numeric: lining-nums;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.4s var(--ease);
+}
+
+.channelValue:hover {
+  background-size: 100% 1px;
+}
+
+.instagram {
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  overflow-wrap: anywhere;
+}
+
+.copyButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid rgb(253 248 242 / 0.4);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper);
+  cursor: pointer;
+  transition:
+    background-color 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+
+.copyButton:hover {
+  border-color: var(--paper);
+  background: rgb(253 248 242 / 0.12);
+}
+
+.copyButton[data-status='copied'] {
+  border-color: var(--paper);
+  background: var(--paper);
+  color: var(--terra-ink);
+}
+
+.contact :focus-visible {
+  outline-color: var(--paper);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .copy > div,
+  .copy > div :global(.btn) {
+    width: 100%;
+  }
+}

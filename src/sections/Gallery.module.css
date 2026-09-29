@@ -1,0 +1,23 @@
+.gallery {
+  background: var(--cream);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px 32px;
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.headTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hint {
+  font-size: 0.9rem;
+  color: var(--cocoa-soft);
+}

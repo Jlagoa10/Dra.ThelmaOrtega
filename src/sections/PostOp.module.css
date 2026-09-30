@@ -36,6 +36,11 @@
   color: var(--accent);
 }
 
+/* O anel de foco padrão (terracota) quase some no marrom: aqui ele usa o pêssego. */
+.postop :focus-visible {
+  outline-color: var(--accent);
+}
+
 .title {
   color: var(--on-dark);
 }

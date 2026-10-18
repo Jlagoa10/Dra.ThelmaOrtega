@@ -125,18 +125,15 @@
   line-height: 1.5;
   letter-spacing: 0.32em;
   text-transform: uppercase;
+  /* Frase longa: quebra em duas linhas equilibradas, na largura do nome. */
+  max-width: 30em;
+  text-wrap: balance;
   animation: rise 1.2s var(--ease-out) 1.05s both;
 }
 
-.areas {
-  margin-top: 6px;
-  font-size: clamp(0.92rem, calc(var(--stage-w) * 0.0082), 1.12rem);
-  letter-spacing: 0.06em;
-  animation: rise 1.2s var(--ease-out) 1.2s both;
-}
-
-.areas span {
-  margin-inline: 0.45em;
+/* Não quebra a linha no hífen de "Pós-Operatório". */
+.nowrap {
+  white-space: nowrap;
 }
 
 @keyframes heroEnter {

@@ -96,7 +96,7 @@ export function Header() {
         <div className={`wrap ${styles.bar}`}>
           <a className={styles.brand} href="#inicio" onClick={() => close()}>
             <span className={styles.brandName}>{site.name}</span>
-            <span className={styles.brandRole}>Fisioterapia</span>
+            <span className={styles.brandRole}>Fisioterapeuta</span>
           </a>
 
           <nav className={styles.nav} aria-label="Principal">

@@ -5,9 +5,11 @@ import { whatsappUrl } from '@/lib/links'
 
 export const profile = {
   paragraphs: [
-    'Sou Dra. Thelma Ortega, fisioterapeuta com atuação voltada ao cuidado da mulher no pós-operatório, na fisioterapia oncológica e no período pós-parto.',
-    'Meu trabalho é acompanhar cada paciente de forma individualizada, com um cuidado seguro e humanizado, focado em funcionalidade, conforto e qualidade de vida.',
-    'Cada processo é único. Por isso, a avaliação e o acompanhamento são personalizados para que o tratamento faça sentido para você.',
+    'Sou a Dra. Thelma Ortega, fisioterapeuta com atuação especializada no acompanhamento fisioterapêutico de pacientes no pós-operatório de cirurgias plásticas.',
+    'Meu trabalho é voltado à avaliação e ao acompanhamento individualizado, respeitando as necessidades clínicas, as particularidades e as diferentes fases de recuperação de cada paciente.',
+    'Por meio de uma abordagem baseada em avaliação criteriosa, conhecimento técnico e cuidado humanizado, busco favorecer uma recuperação segura, promover a funcionalidade, proporcionar conforto e contribuir para a qualidade de vida durante todo o processo pós-operatório.',
+    'Cada paciente tem uma história, cada cirurgia exige cuidados específicos e cada recuperação merece um olhar atento e individualizado.',
+    'Meu compromisso é oferecer um acompanhamento responsável, acolhedor e fundamentado em critérios clínicos, respeitando a evolução de cada paciente e trabalhando em conjunto com a equipe médica sempre que necessário.',
   ],
   pillars: ['Cuidado individualizado', 'Segurança', 'Funcionalidade', 'Qualidade de vida'],
 }
@@ -29,7 +31,7 @@ export const specialties: Specialty[] = [
     link: { href: '#pos-operatorio', label: 'Entender o processo' },
   },
   {
-    title: 'Fisioterapia Oncológica',
+    title: 'Fisioterapia Oncológica com foco em Câncer de Mama',
     kicker: 'Durante e após o tratamento',
     text: 'Atendimento voltado às necessidades funcionais e ao cuidado da mulher durante e após tratamentos oncológicos.',
     icon: 'ribbon',
@@ -40,7 +42,7 @@ export const specialties: Specialty[] = [
     },
   },
   {
-    title: 'Pós-parto',
+    title: 'Fisioterapia na Recuperação Pós-Parto',
     kicker: 'Após o nascimento',
     text: 'Um olhar individualizado para as mudanças do corpo e as necessidades funcionais do período pós-parto.',
     icon: 'motherhood',

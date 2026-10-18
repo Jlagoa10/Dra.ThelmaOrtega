@@ -13,9 +13,6 @@ export function Specialties() {
               Um cuidado dedicado a cada <em className="script">fase</em>
             </h2>
           </div>
-          <p className="lead">
-            Três momentos diferentes da vida da mulher, cada um com necessidades próprias de acompanhamento.
-          </p>
         </header>
 
         <ul className={styles.cards}>

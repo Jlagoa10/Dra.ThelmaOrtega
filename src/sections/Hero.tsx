@@ -26,11 +26,11 @@ export function Hero() {
           <h1 id="hero-title" className={styles.title}>
             <span className={styles.name}>Thelma Ortega</span>
             <span className="sr-only"> — </span>
-            <span className={styles.role}>Fisioterapia Pós-Cirúrgica</span>
+            <span className={styles.role}>
+              Fisioterapia Especializada em <span className={styles.nowrap}>Pós-Operatório</span> de Cirurgias
+              Plásticas
+            </span>
           </h1>
-          <p className={styles.areas}>
-            Oncológica <span aria-hidden="true">·</span> Pós-parto
-          </p>
         </div>
       </div>
     </section>

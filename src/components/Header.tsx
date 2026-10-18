@@ -95,7 +95,7 @@ export function Header() {
       <header className={styles.header} data-scrolled={scrolled || undefined} data-open={open || undefined}>
         <div className={`wrap ${styles.bar}`}>
           <a className={styles.brand} href="#inicio" onClick={() => close()}>
-            <span className={styles.brandName}>{site.name}</span>
+            <span className={styles.brandName}>{site.professional}</span>
             <span className={styles.brandRole}>Fisioterapeuta</span>
           </a>
 

@@ -120,7 +120,7 @@
 .role {
   margin-top: clamp(4px, 0.8vw, 10px);
   padding-left: 0.32em;
-  font-size: clamp(0.8rem, calc(var(--stage-w) * 0.0086), 1.12rem);
+  font-size: clamp(0.66rem, calc(var(--stage-w) * 0.0068), 0.9rem);
   font-weight: 600;
   line-height: 1.5;
   letter-spacing: 0.32em;

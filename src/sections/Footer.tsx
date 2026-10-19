@@ -12,8 +12,8 @@ export function Footer() {
         <div className={styles.grid}>
           <div className={styles.brandCol}>
             <a className={styles.brand} href="#inicio">
-              <span className={styles.brandName}>{site.name}</span>
-              <span className={styles.brandRole}>Fisioterapia</span>
+              <span className={styles.brandName}>{site.professional}</span>
+              <span className={styles.brandRole}>Fisioterapeuta</span>
             </a>
             <p className={styles.tagline}>{site.tagline}</p>
           </div>

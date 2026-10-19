@@ -34,15 +34,16 @@
 
 .brandName {
   font-family: var(--font-script);
-  font-size: clamp(2.8rem, 4vw, 3.4rem);
-  line-height: 0.9;
+  font-size: 2.15rem;
+  line-height: 0.85;
   color: var(--on-dark);
+  white-space: nowrap;
 }
 
 .brandRole {
-  margin-top: 4px;
+  margin-top: 2px;
   padding-left: 0.2em;
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.38em;
   text-transform: uppercase;
@@ -193,5 +194,11 @@
 
   .separator {
     display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .brandName {
+    font-size: 1.95rem;
   }
 }

@@ -33,7 +33,7 @@ export const specialties: Specialty[] = [
   {
     title: 'Fisioterapia Oncológica com foco em Câncer de Mama',
     kicker: 'Durante e após o tratamento',
-    text: 'Atendimento voltado às necessidades funcionais e ao cuidado da mulher durante e após tratamentos oncológicos.',
+    text: 'Atendimento voltado às necessidades funcionais e ao cuidado da mulher durante e após cirurgia oncológica das mamas.',
     icon: 'ribbon',
     link: {
       href: whatsappUrl('Olá, Dra. Thelma! Gostaria de saber mais sobre a fisioterapia oncológica.'),

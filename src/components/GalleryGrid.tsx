@@ -8,11 +8,41 @@ import styles from './GalleryGrid.module.css'
 
 type Photo = Required<Pick<GalleryItem, 'image' | 'caption'>> & GalleryItem
 
+function GalleryVideo({ item }: { item: GalleryItem }) {
+  const [playing, setPlaying] = useState(false)
+  const [failed, setFailed] = useState(false)
+
+  return (
+    <div className={styles.videoCard}>
+      {playing ? (
+        <video
+          className={styles.video}
+          src={item.videoUrl}
+          poster={item.poster?.src}
+          controls
+          autoPlay
+          playsInline
+          preload="none"
+          aria-label={item.caption}
+          onError={() => { setFailed(true); setPlaying(false) }}
+        />
+      ) : (
+        <button type="button" className={styles.videoTrigger} onClick={() => { setFailed(false); setPlaying(true) }} aria-label={`Reproduzir vídeo: ${item.caption}`}>
+          {item.poster && <Image src={item.poster} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw" placeholder="blur" className={styles.poster} />}
+          <span className={styles.play} aria-hidden="true">▶</span>
+          <span className={styles.videoLabel}>Assistir vídeo</span>
+        </button>
+      )}
+      {failed && <p className={styles.videoError} role="status">Vídeo indisponível no momento. Tente novamente mais tarde.</p>}
+      <p className={styles.videoTitle}>{item.caption}</p>
+    </div>
+  )
+}
+
 export function GalleryGrid({ items }: { items: GalleryItem[] }) {
   const photos = items.filter((item): item is Photo => Boolean(item.image))
   const [current, setCurrent] = useState<number | null>(null)
   const [closing, setClosing] = useState(false)
-  const [videoOpen, setVideoOpen] = useState(false)
   const dialogRef = useRef<HTMLDialogElement>(null)
   const touchStart = useRef<number | null>(null)
 
@@ -83,7 +113,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
                   src={item.image}
                   alt={item.alt ?? ''}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"
                   placeholder="blur"
                   className={styles.image}
                   style={{ objectPosition: item.position }}
@@ -93,27 +123,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
                 </span>
               </button>
             ) : item.videoUrl ? (
-              <div className={styles.videoCard}>
-                {videoOpen ? (
-                  <iframe
-                    src={`${item.videoUrl}embed/`}
-                    title="Publicação da Thelma no Instagram"
-                    className={styles.videoFrame}
-                    allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-                    allowFullScreen
-                  />
-                ) : (
-                  <button type="button" className={styles.videoTrigger} onClick={() => setVideoOpen(true)}>
-                    <span className={styles.play} aria-hidden="true">▶</span>
-                    <span className="eyebrow">Thelma em vídeo</span>
-                    <strong>{item.caption}</strong>
-                    <span>Toque para carregar o vídeo</span>
-                  </button>
-                )}
-                <a className={styles.videoLink} href={item.videoUrl} target="_blank" rel="noopener noreferrer">
-                  Assistir no Instagram ↗
-                </a>
-              </div>
+              <GalleryVideo item={item} />
             ) : (
               <div className={styles.contentCard}>
                 <Icon name={item.icon ?? 'heart'} size={28} />
@@ -165,6 +175,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
             {active && (
               <figcaption className={styles.lbCaption} aria-live="polite">
                 {active.caption}
+                {active.text && <span className={styles.note}>{active.text}</span>}
                 {total > 1 && (
                   <span className={styles.counter}>
                     {(current ?? 0) + 1} / {total}

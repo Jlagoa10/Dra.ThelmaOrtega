@@ -33,22 +33,20 @@ src/
 
 Telefone, endereço e Instagram ficam só em `src/data/site.ts`. Textos de especialidades, etapas, FAQ e galeria ficam em `src/data/content.ts`.
 
-## Trocando os espaços reservados por fotos
+## Galeria: fotos, capas e v?deos
 
-A Galeria e a seção Ambiente mostram "Foto em breve" onde ainda não há imagem.
+A galeria exibe tr?s fotos e tr?s v?deos locais. As fotos abrem em uma lightbox; os v?deos carregam somente ao clicar na capa.
 
-1. Coloque a foto em `src/assets/images/` (JPG, PNG ou WebP; o Next gera AVIF/WebP otimizados sozinho).
-2. Em `src/data/content.ts`, importe o arquivo no topo:
-   ```ts
-   import consultorio from '@/assets/images/consultorio.jpg'
-   ```
-3. No item correspondente de `gallery` ou `environment`, preencha `image` e `alt`:
-   ```ts
-   { caption: 'Consultório', image: consultorio, alt: 'Sala de atendimento com maca e plantas' },
-   ```
-   `position` (opcional) ajusta o enquadramento, por exemplo `'50% 20%'`.
+As fotos novas e as tr?s capas j? est?o em `src/assets/images/gallery/`.
+Salve os v?deos MP4 em `public/videos/`, com estes nomes exatos:
 
-A galeria foi desenhada para 6 fotos. Com mais de 6, as extras entram numa faixa regular abaixo.
+| V?deo | Arquivo |
+| --- | --- |
+| Cirurgia pl?stica | `cirurgia-plastica.mp4` |
+| Acompanhamento hospitalar | `acompanhamento-hospitalar.mp4` |
+| Benef?cio do laser terap?utico | `laser-terapeutico.mp4` |
+
+Os caminhos j? est?o configurados em `src/data/content.ts`. N?o ? necess?rio alterar c?digo ap?s adicionar os v?deos. Use MP4 com v?deo H.264 e ?udio AAC para compatibilidade com navegadores.
 
 ## Publicação na Vercel
 

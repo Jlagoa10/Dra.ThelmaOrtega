@@ -1,5 +1,10 @@
 import type { StaticImageData } from 'next/image'
 import portrait from '@/assets/images/dra-thelma-ortega.webp'
+import hospital from '@/assets/images/gallery/rotina-hospitalar.jpg'
+import rest from '@/assets/images/gallery/tempo-de-repouso.jpg'
+import surgeryCover from '@/assets/images/gallery/cirurgia-plastica.png'
+import hospitalCover from '@/assets/images/gallery/acompanhamento-hospitalar.png'
+import laserCover from '@/assets/images/gallery/laser-terapeutico.png'
 import type { IconName } from '@/components/Icon'
 import { whatsappUrl } from '@/lib/links'
 
@@ -96,16 +101,13 @@ export type GalleryItem = {
   text?: string
   icon?: IconName
   videoUrl?: string
-  /** Sem imagem, o item aparece como espaço reservado até a foto ser enviada. */
+  poster?: StaticImageData
   image?: StaticImageData
   alt?: string
   position?: string
 }
 
-/**
- * Para trocar um espaço reservado por uma foto: coloque o arquivo em
- * src/assets/images, importe-o no topo deste arquivo e preencha `image` e `alt`.
- */
+/** Vídeos locais em public/videos; capas e fotos em src/assets/images/gallery. */
 export const gallery: GalleryItem[] = [
   {
     caption: 'Dra. Thelma Ortega no consultório',
@@ -113,11 +115,11 @@ export const gallery: GalleryItem[] = [
     alt: 'Dra. Thelma Ortega de uniforme branco no consultório, com macas e plantas ao fundo',
     position: '50% 18%',
   },
-  { caption: 'Escuta e acolhimento', text: 'Espaço para conversar sobre suas necessidades e tirar suas dúvidas.', icon: 'heart' },
-  { caption: 'Um olhar mais próximo', text: 'Assista à publicação da Thelma.', videoUrl: 'https://www.instagram.com/p/DYpTvfMxkQ2/' },
-  { caption: 'Primeira avaliação', text: 'Um encontro para compreender seu momento e orientar os próximos passos.', icon: 'compass' },
-  { caption: 'Meu jeito de cuidar', text: 'Cada paciente tem uma história. Cada recuperação merece um olhar atento e individualizado.', icon: 'heart' },
-  { caption: 'Cuidado em cada etapa', text: 'Avaliação, orientação e acompanhamento, respeitando o seu ritmo de recuperação.', icon: 'together' },
+  { caption: 'Rotina hospitalar', image: hospital, alt: 'Registro de profissionais em ambiente hospitalar' },
+  { caption: 'Tempo médio de repouso', image: rest, alt: 'Infográfico sobre o tempo médio de repouso após diferentes procedimentos', text: 'Os períodos apresentados são referências gerais. Siga as orientações da equipe médica para o seu caso.' },
+  { caption: 'Cirurgia plástica', videoUrl: '/videos/cirurgia-plastica.mp4', poster: surgeryCover },
+  { caption: 'Acompanhamento hospitalar', videoUrl: '/videos/acompanhamento-hospitalar.mp4', poster: hospitalCover },
+  { caption: 'Benefício do laser terapêutico', videoUrl: '/videos/laser-terapeutico.mp4', poster: laserCover },
 ]
 
 export const environment: { main: GalleryItem; detail: GalleryItem } = {

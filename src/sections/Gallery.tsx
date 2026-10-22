@@ -15,7 +15,7 @@ export function Gallery() {
               Um pouco do dia a dia
             </h2>
           </div>
-          {hasPhotos && <p className={styles.hint}>Toque em uma foto para ampliar.</p>}
+          {hasPhotos && <p className={styles.hint}>Toque nas fotos para ampliar ou nas capas para assistir.</p>}
         </header>
 
         <GalleryGrid items={gallery} />

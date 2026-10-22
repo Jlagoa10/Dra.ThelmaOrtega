@@ -45,6 +45,18 @@
   object-fit: cover;
 }
 
+.imageCaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 36px 12px 16px;
+  background: linear-gradient(transparent, rgb(54 35 26 / 0.85));
+  color: var(--paper);
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+}
+
 .careCard {
   height: 100%;
   display: flex;

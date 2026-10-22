@@ -1,5 +1,7 @@
 import type { StaticImageData } from 'next/image'
 import portrait from '@/assets/images/dra-thelma-ortega.webp'
+import preparation from '@/assets/images/gallery/thelma-preparando-atendimento.png'
+import office from '@/assets/images/gallery/consultorio.png'
 import hospital from '@/assets/images/gallery/rotina-hospitalar.jpg'
 import rest from '@/assets/images/gallery/tempo-de-repouso.jpg'
 import surgeryCover from '@/assets/images/gallery/cirurgia-plastica.png'
@@ -123,8 +125,8 @@ export const gallery: GalleryItem[] = [
 ]
 
 export const environment: { main: GalleryItem; detail: GalleryItem } = {
-  main: { caption: 'Dra. Thelma Ortega', image: portrait, alt: 'Dra. Thelma Ortega, fisioterapeuta', position: '50% 18%' },
-  detail: { caption: 'Cuidado individualizado', text: 'Um olhar atento para a sua história.', icon: 'heart' },
+  main: { caption: 'Dra. Thelma Ortega', image: preparation, alt: 'Thelma preparando uma toalha sobre a maca de atendimento', position: '50% 50%' },
+  detail: { caption: 'Cuidado individualizado', image: office, alt: 'Ambiente de atendimento com maca, móveis de madeira e iluminação natural', position: '30% 65%' },
 }
 
 export const faq = [

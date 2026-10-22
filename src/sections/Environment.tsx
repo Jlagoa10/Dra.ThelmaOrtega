@@ -3,7 +3,7 @@ import { Icon } from '@/components/Icon'
 import { environment, type GalleryItem } from '@/data/content'
 import styles from './Environment.module.css'
 
-function Media({ item, className, sizes }: { item: GalleryItem; className: string; sizes: string }) {
+function Media({ item, className, sizes, showCaption = false }: { item: GalleryItem; className: string; sizes: string; showCaption?: boolean }) {
   return (
     <div className={className}>
       {item.image ? (
@@ -23,6 +23,7 @@ function Media({ item, className, sizes }: { item: GalleryItem; className: strin
           <p>{item.text}</p>
         </div>
       )}
+      {item.image && showCaption && <span className={styles.imageCaption}>{item.caption}</span>}
     </div>
   )
 }
@@ -33,7 +34,7 @@ export function Environment() {
       <div className={`wrap ${styles.grid}`}>
         <div className={styles.composition} data-reveal="scale">
           <Media item={environment.main} className={styles.main} sizes="(max-width: 900px) 80vw, 45vw" />
-          <Media item={environment.detail} className={styles.detail} sizes="(max-width: 900px) 45vw, 22vw" />
+          <Media item={environment.detail} className={styles.detail} sizes="(max-width: 900px) 45vw, 22vw" showCaption />
         </div>
 
         <div className={styles.copy} data-reveal>

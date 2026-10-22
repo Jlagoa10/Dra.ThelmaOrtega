@@ -78,7 +78,7 @@ function GalleryVideo({ item }: { item: GalleryItem }) {
         </div>
       ) : (
         <button type="button" className={styles.videoTrigger} onClick={() => { setFailed(false); setPlaying(true) }} aria-label={`Reproduzir vídeo: ${item.caption}`}>
-          {item.poster && <Image src={item.poster} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw" placeholder="blur" className={styles.poster} />}
+          {item.poster && <Image src={item.poster} alt="" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw" placeholder="blur" className={styles.poster} />}
           <span className={styles.play} aria-hidden="true"><Icon name="play" size={24} /></span>
           <span className={styles.videoLabel}>Assistir vídeo</span>
         </button>

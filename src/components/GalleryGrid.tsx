@@ -78,7 +78,8 @@ function GalleryVideo({ item }: { item: GalleryItem }) {
               if (videoRef.current) videoRef.current.currentTime = nextTime
               setTime(nextTime)
             }} />
-            <button type="button" aria-label={muted || volume === 0 ? 'Ativar som' : 'Silenciar'} aria-pressed={muted || volume === 0} onClick={() => {
+            <div className={styles.volumeGroup}>
+            <button type="button" aria-label={muted || volume === 0 ? 'Ativar som e ajustar volume' : 'Silenciar e ajustar volume'} aria-pressed={muted || volume === 0} onClick={() => {
               if (muted || volume === 0) { setMuted(false); if (volume === 0) setVolume(100) }
               else setMuted(true)
             }}><Icon name={muted || volume === 0 ? 'volumeOff' : 'volume'} size={20} /></button>
@@ -89,6 +90,7 @@ function GalleryVideo({ item }: { item: GalleryItem }) {
               }} />
               <span className={styles.volumeValue}>{muted ? 0 : volume}%</span>
             </label>
+            </div>
           </div>
         </div>
       ) : (

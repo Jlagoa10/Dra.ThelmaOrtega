@@ -50,7 +50,28 @@
 .playerControls :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .playerControls { flex-wrap: wrap; gap: 0 8px; }
 .playerControls .progress { flex-basis: 100%; order: -1; height: 24px; }
-.volumeControl { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+.volumeGroup { position: relative; margin-left: auto; }
+.volumeControl {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 180px;
+  padding: 4px 12px;
+  border-radius: 10px;
+  background: rgb(24 18 15 / 0.94);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.volumeGroup:hover .volumeControl,
+.volumeGroup:focus-within .volumeControl {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
 .volumeValue { width: 4ch; flex-shrink: 0; font-size: 0.75rem; text-align: right; font-variant-numeric: tabular-nums; }
 .videoTrigger { position: relative; display: block; width: 100%; aspect-ratio: 9 / 16; padding: 0; border: 0; background: var(--sand); cursor: pointer; color: var(--cocoa-night); font: inherit; overflow: hidden; }
 .poster { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }

@@ -67,19 +67,19 @@ function GalleryVideo({ item }: { item: GalleryItem }) {
               if (!video) return
               if (video.paused) void video.play().catch(() => setPaused(true))
               else video.pause()
-            }}>{paused ? '▶' : 'Ⅱ'}</button>
+            }}><Icon name={paused ? 'play' : 'pause'} size={20} /></button>
             <input type="range" min={0} max={duration || 1} step={0.1} value={Math.min(time, duration || 1)} disabled={!duration} aria-label="Progresso do vídeo" onChange={(event) => {
               const nextTime = Number(event.target.value)
               if (videoRef.current) videoRef.current.currentTime = nextTime
               setTime(nextTime)
             }} />
-            <button type="button" aria-label={muted ? 'Ativar som' : 'Silenciar'} aria-pressed={muted} onClick={() => setMuted(!muted)}>{muted ? 'Sem som' : 'Som'}</button>
+            <button type="button" aria-label={muted ? 'Ativar som' : 'Silenciar'} aria-pressed={muted} onClick={() => setMuted(!muted)}><Icon name={muted ? 'volumeOff' : 'volume'} size={20} /></button>
           </div>
         </div>
       ) : (
         <button type="button" className={styles.videoTrigger} onClick={() => { setFailed(false); setPlaying(true) }} aria-label={`Reproduzir vídeo: ${item.caption}`}>
           {item.poster && <Image src={item.poster} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw" placeholder="blur" className={styles.poster} />}
-          <span className={styles.play} aria-hidden="true">▶</span>
+          <span className={styles.play} aria-hidden="true"><Icon name="play" size={24} /></span>
           <span className={styles.videoLabel}>Assistir vídeo</span>
         </button>
       )}

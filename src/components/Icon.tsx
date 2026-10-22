@@ -7,6 +7,10 @@ const stroke = (children: ReactNode) => (
 )
 
 const icons = {
+  play: <path fill="currentColor" d="M8 5.5a.8.8 0 0 1 1.2-.7l10 6.5a.8.8 0 0 1 0 1.4l-10 6.5a.8.8 0 0 1-1.2-.7z" />,
+  pause: <g fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></g>,
+  volume: stroke(<g strokeWidth="1.7"><path d="M11 5 6 9H3v6h3l5 4zM15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14" /></g>),
+  volumeOff: stroke(<g strokeWidth="1.7"><path d="M11 5 6 9H3v6h3l5 4zM16 9l6 6M22 9l-6 6" /></g>),
   whatsapp: (
     <path
       fill="currentColor"

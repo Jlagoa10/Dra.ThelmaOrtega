@@ -13,9 +13,14 @@ function GalleryVideo({ item }: { item: GalleryItem }) {
   const [failed, setFailed] = useState(false)
   const [paused, setPaused] = useState(false)
   const [muted, setMuted] = useState(false)
+  const [volume, setVolume] = useState(100)
   const [time, setTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.volume = volume / 100
+  }, [playing, volume])
 
   useEffect(() => {
     const video = videoRef.current
@@ -68,12 +73,22 @@ function GalleryVideo({ item }: { item: GalleryItem }) {
               if (video.paused) void video.play().catch(() => setPaused(true))
               else video.pause()
             }}><Icon name={paused ? 'play' : 'pause'} size={20} /></button>
-            <input type="range" min={0} max={duration || 1} step={0.1} value={Math.min(time, duration || 1)} disabled={!duration} aria-label="Progresso do vídeo" onChange={(event) => {
+            <input className={styles.progress} type="range" min={0} max={duration || 1} step={0.1} value={Math.min(time, duration || 1)} disabled={!duration} aria-label="Progresso do vídeo" onChange={(event) => {
               const nextTime = Number(event.target.value)
               if (videoRef.current) videoRef.current.currentTime = nextTime
               setTime(nextTime)
             }} />
-            <button type="button" aria-label={muted ? 'Ativar som' : 'Silenciar'} aria-pressed={muted} onClick={() => setMuted(!muted)}><Icon name={muted ? 'volumeOff' : 'volume'} size={20} /></button>
+            <button type="button" aria-label={muted || volume === 0 ? 'Ativar som' : 'Silenciar'} aria-pressed={muted || volume === 0} onClick={() => {
+              if (muted || volume === 0) { setMuted(false); if (volume === 0) setVolume(100) }
+              else setMuted(true)
+            }}><Icon name={muted || volume === 0 ? 'volumeOff' : 'volume'} size={20} /></button>
+            <label className={styles.volumeControl}>
+              <input type="range" min={0} max={100} step={1} value={muted ? 0 : volume} aria-label="Volume do vídeo" aria-valuetext={`${muted ? 0 : volume}%`} onChange={(event) => {
+                setVolume(Number(event.target.value))
+                setMuted(false)
+              }} />
+              <span className={styles.volumeValue}>{muted ? 0 : volume}%</span>
+            </label>
           </div>
         </div>
       ) : (

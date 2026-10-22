@@ -35,7 +35,7 @@ Telefone, endereço e Instagram ficam só em `src/data/site.ts`. Textos de espec
 
 ## Galeria: fotos, capas e v?deos
 
-A galeria exibe tr?s fotos e tr?s v?deos locais. As fotos abrem em uma lightbox; os v?deos carregam somente ao clicar na capa.
+A galeria exibe tr?s fotos e tr?s v?deos locais. As fotos s?o exibidas diretamente na galeria; os v?deos carregam somente ao clicar na capa.
 
 As fotos novas e as tr?s capas j? est?o em `src/assets/images/gallery/`.
 Salve os v?deos MP4 em `public/videos/`, com estes nomes exatos:

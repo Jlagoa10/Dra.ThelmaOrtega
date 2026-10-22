@@ -27,7 +27,7 @@
 }
 
 .image { object-fit: cover; transition: transform var(--dur-base) var(--ease); }
-.item:nth-child(3) .image { object-fit: contain; }
+.item:nth-child(3) .photo { aspect-ratio: 1440 / 1676; }
 .photo:hover .image { transform: scale(1.025); }
 .photo:focus-visible, .videoTrigger:focus-visible { outline: 3px solid var(--terra-ink); outline-offset: -4px; }
 .photo::after { content: ''; position: absolute; inset: 55% 0 0; background: linear-gradient(transparent, rgb(78 56 48 / 0.8)); pointer-events: none; }
@@ -50,11 +50,11 @@
 .playerControls input { flex: 1; min-width: 0; height: 44px; accent-color: var(--accent); cursor: pointer; }
 .playerControls :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .videoTrigger { position: relative; display: block; width: 100%; aspect-ratio: 1 / 2; padding: 0; border: 0; background: var(--sand); cursor: pointer; color: var(--cocoa-night); font: inherit; }
-.poster { object-fit: contain; }
+.poster { object-fit: cover; }
 .play { position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%); display: grid; place-items: center; width: 58px; height: 58px; padding-left: 4px; background: var(--paper); border: 1px solid var(--line-strong); border-radius: 50%; box-shadow: var(--shadow-soft); }
 .videoTrigger:hover .play { background: var(--accent-soft); }
 .videoLabel { position: absolute; bottom: 24px; left: 0; right: 0; text-align: center; font-size: 0.8rem; }
-.video { display: block; width: 100%; aspect-ratio: 1 / 2; object-fit: contain; background: var(--cocoa-night); }
+.video { display: block; width: 100%; aspect-ratio: 1 / 2; object-fit: cover; background: var(--cocoa-night); }
 .videoTitle { padding: 16px 20px; margin: 0; font-size: 0.9rem; font-weight: 600; }
 .videoError { position: absolute; bottom: 70px; left: 12px; right: 12px; padding: 12px; border-radius: 8px; background: var(--paper); color: var(--cocoa-night); font-size: 0.8rem; text-align: center; pointer-events: none; }
 .note { flex-basis: 100%; max-width: 680px; color: var(--on-dark-soft); font-size: 0.8rem; }

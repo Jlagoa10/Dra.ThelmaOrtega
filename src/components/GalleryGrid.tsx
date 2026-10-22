@@ -78,13 +78,17 @@ function GalleryVideo({ item }: { item: GalleryItem }) {
               if (videoRef.current) videoRef.current.currentTime = nextTime
               setTime(nextTime)
             }} />
-            <div className={styles.volumeGroup}>
+            <div className={styles.volumeGroup} onPointerLeave={(event) => {
+              if (event.pointerType !== 'mouse') return
+              const focused = event.currentTarget.querySelector(':focus')
+              if (focused instanceof HTMLElement) focused.blur()
+            }}>
             <button type="button" aria-label={muted || volume === 0 ? 'Ativar som e ajustar volume' : 'Silenciar e ajustar volume'} aria-pressed={muted || volume === 0} onClick={() => {
               if (muted || volume === 0) { setMuted(false); if (volume === 0) setVolume(100) }
               else setMuted(true)
             }}><Icon name={muted || volume === 0 ? 'volumeOff' : 'volume'} size={20} /></button>
             <label className={styles.volumeControl}>
-              <input type="range" min={0} max={100} step={1} value={muted ? 0 : volume} aria-label="Volume do vídeo" aria-valuetext={`${muted ? 0 : volume}%`} onChange={(event) => {
+              <input type="range" min={0} max={100} step={1} value={muted ? 0 : volume} aria-label="Volume do vídeo" aria-orientation="vertical" aria-valuetext={`${muted ? 0 : volume}%`} onChange={(event) => {
                 setVolume(Number(event.target.value))
                 setMuted(false)
               }} />

@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useRef, useState, type KeyboardEvent, type MouseEvent, type TouchEvent } from 'react'
+import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent, type TouchEvent } from 'react'
 import { Icon } from '@/components/Icon'
 import type { GalleryItem } from '@/data/content'
 import styles from './GalleryGrid.module.css'
@@ -11,11 +11,34 @@ type Photo = Required<Pick<GalleryItem, 'image' | 'caption'>> & GalleryItem
 function GalleryVideo({ item }: { item: GalleryItem }) {
   const [playing, setPlaying] = useState(false)
   const [failed, setFailed] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!playing || !video) return
+
+    const reset = () => {
+      video.pause()
+      video.currentTime = 0
+      setPlaying(false)
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) reset()
+    }, { threshold: 0 })
+    observer.observe(video)
+
+    return () => {
+      observer.disconnect()
+      video.pause()
+    }
+  }, [playing])
 
   return (
     <div className={styles.videoCard}>
       {playing ? (
         <video
+          ref={videoRef}
           className={styles.video}
           src={item.videoUrl}
           poster={item.poster?.src}

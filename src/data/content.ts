@@ -93,6 +93,9 @@ export const steps = [
 
 export type GalleryItem = {
   caption: string
+  text?: string
+  icon?: IconName
+  videoUrl?: string
   /** Sem imagem, o item aparece como espaço reservado até a foto ser enviada. */
   image?: StaticImageData
   alt?: string
@@ -110,16 +113,16 @@ export const gallery: GalleryItem[] = [
     alt: 'Dra. Thelma Ortega de uniforme branco no consultório, com macas e plantas ao fundo',
     position: '50% 18%',
   },
-  { caption: 'Consultório' },
-  { caption: 'Atendimento' },
-  { caption: 'Detalhes do espaço' },
-  { caption: 'Equipe' },
-  { caption: 'Rotina de cuidado' },
+  { caption: 'Escuta e acolhimento', text: 'Espaço para conversar sobre suas necessidades e tirar suas dúvidas.', icon: 'heart' },
+  { caption: 'Um olhar mais próximo', text: 'Assista à publicação da Thelma.', videoUrl: 'https://www.instagram.com/p/DYpTvfMxkQ2/' },
+  { caption: 'Primeira avaliação', text: 'Um encontro para compreender seu momento e orientar os próximos passos.', icon: 'compass' },
+  { caption: 'Meu jeito de cuidar', text: 'Cada paciente tem uma história. Cada recuperação merece um olhar atento e individualizado.', icon: 'heart' },
+  { caption: 'Cuidado em cada etapa', text: 'Avaliação, orientação e acompanhamento, respeitando o seu ritmo de recuperação.', icon: 'together' },
 ]
 
 export const environment: { main: GalleryItem; detail: GalleryItem } = {
-  main: { caption: 'Consultório' },
-  detail: { caption: 'Equipe' },
+  main: { caption: 'Dra. Thelma Ortega', image: portrait, alt: 'Dra. Thelma Ortega, fisioterapeuta', position: '50% 18%' },
+  detail: { caption: 'Cuidado individualizado', text: 'Um olhar atento para a sua história.', icon: 'heart' },
 }
 
 export const faq = [
@@ -131,7 +134,7 @@ export const faq = [
   {
     question: 'Para quais tipos de cirurgia existe acompanhamento?',
     answer:
-      'O acompanhamento é voltado ao pós-operatório de cirurgias plásticas, à reconstrução mamária e a cirurgias relacionadas a tratamentos oncológicos. A indicação para cada caso é definida na avaliação, em conjunto com as orientações da equipe médica.',
+      'O acompanhamento é voltado ao pós-operatório de cirurgias plásticas e cirurgia oncológica mamária. A indicação para cada caso é definida na avaliação, em conjunto com as orientações da equipe médica.',
   },
   {
     question: 'Como funciona a primeira avaliação?',

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { PhotoPlaceholder } from '@/components/PhotoPlaceholder'
+import { Icon } from '@/components/Icon'
 import { environment, type GalleryItem } from '@/data/content'
 import styles from './Environment.module.css'
 
@@ -17,7 +17,11 @@ function Media({ item, className, sizes }: { item: GalleryItem; className: strin
           style={{ objectPosition: item.position }}
         />
       ) : (
-        <PhotoPlaceholder label={item.caption} />
+        <div className={styles.careCard}>
+          <Icon name={item.icon ?? 'heart'} size={28} />
+          <strong>{item.caption}</strong>
+          <p>{item.text}</p>
+        </div>
       )}
     </div>
   )
@@ -33,7 +37,7 @@ export function Environment() {
         </div>
 
         <div className={styles.copy} data-reveal>
-          <span className="eyebrow">Ambiente</span>
+          <span className="eyebrow">Meu jeito de cuidar</span>
           <h2 id="ambiente-title" className="title">
             Experiência, cuidado e atenção em cada <em className="script">etapa.</em>
           </h2>

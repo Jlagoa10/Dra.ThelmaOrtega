@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { useRef, useState, type KeyboardEvent, type MouseEvent, type TouchEvent } from 'react'
 import { Icon } from '@/components/Icon'
-import { PhotoPlaceholder } from '@/components/PhotoPlaceholder'
 import type { GalleryItem } from '@/data/content'
 import styles from './GalleryGrid.module.css'
 
@@ -13,6 +12,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
   const photos = items.filter((item): item is Photo => Boolean(item.image))
   const [current, setCurrent] = useState<number | null>(null)
   const [closing, setClosing] = useState(false)
+  const [videoOpen, setVideoOpen] = useState(false)
   const dialogRef = useRef<HTMLDialogElement>(null)
   const touchStart = useRef<number | null>(null)
 
@@ -92,8 +92,34 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
                   {item.caption}
                 </span>
               </button>
+            ) : item.videoUrl ? (
+              <div className={styles.videoCard}>
+                {videoOpen ? (
+                  <iframe
+                    src={`${item.videoUrl}embed/`}
+                    title="Publicação da Thelma no Instagram"
+                    className={styles.videoFrame}
+                    allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                    allowFullScreen
+                  />
+                ) : (
+                  <button type="button" className={styles.videoTrigger} onClick={() => setVideoOpen(true)}>
+                    <span className={styles.play} aria-hidden="true">▶</span>
+                    <span className="eyebrow">Thelma em vídeo</span>
+                    <strong>{item.caption}</strong>
+                    <span>Toque para carregar o vídeo</span>
+                  </button>
+                )}
+                <a className={styles.videoLink} href={item.videoUrl} target="_blank" rel="noopener noreferrer">
+                  Assistir no Instagram ↗
+                </a>
+              </div>
             ) : (
-              <PhotoPlaceholder label={item.caption} />
+              <div className={styles.contentCard}>
+                <Icon name={item.icon ?? 'heart'} size={28} />
+                <h3>{item.caption}</h3>
+                <p>{item.text}</p>
+              </div>
             )}
           </li>
         ))}

@@ -11,6 +11,10 @@ type Photo = Required<Pick<GalleryItem, 'image' | 'caption'>> & GalleryItem
 function GalleryVideo({ item }: { item: GalleryItem }) {
   const [playing, setPlaying] = useState(false)
   const [failed, setFailed] = useState(false)
+  const [paused, setPaused] = useState(false)
+  const [muted, setMuted] = useState(false)
+  const [time, setTime] = useState(0)
+  const [duration, setDuration] = useState(0)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -20,6 +24,7 @@ function GalleryVideo({ item }: { item: GalleryItem }) {
     const reset = () => {
       video.pause()
       video.currentTime = 0
+      setTime(0)
       setPlaying(false)
     }
 
@@ -37,18 +42,40 @@ function GalleryVideo({ item }: { item: GalleryItem }) {
   return (
     <div className={styles.videoCard}>
       {playing ? (
+        <div className={styles.player}>
         <video
           ref={videoRef}
           className={styles.video}
           src={item.videoUrl}
           poster={item.poster?.src}
-          controls
+          disablePictureInPicture
+          disableRemotePlayback
+          muted={muted}
           autoPlay
           playsInline
           preload="none"
           aria-label={item.caption}
+          onPlay={() => setPaused(false)}
+          onPause={() => setPaused(true)}
+          onTimeUpdate={(event) => setTime(event.currentTarget.currentTime)}
+          onDurationChange={(event) => setDuration(Number.isFinite(event.currentTarget.duration) ? event.currentTarget.duration : 0)}
           onError={() => { setFailed(true); setPlaying(false) }}
         />
+          <div className={styles.playerControls} role="group" aria-label={`Controles: ${item.caption}`}>
+            <button type="button" aria-label={paused ? 'Reproduzir' : 'Pausar'} onClick={() => {
+              const video = videoRef.current
+              if (!video) return
+              if (video.paused) void video.play().catch(() => setPaused(true))
+              else video.pause()
+            }}>{paused ? '▶' : 'Ⅱ'}</button>
+            <input type="range" min={0} max={duration || 1} step={0.1} value={Math.min(time, duration || 1)} disabled={!duration} aria-label="Progresso do vídeo" onChange={(event) => {
+              const nextTime = Number(event.target.value)
+              if (videoRef.current) videoRef.current.currentTime = nextTime
+              setTime(nextTime)
+            }} />
+            <button type="button" aria-label={muted ? 'Ativar som' : 'Silenciar'} aria-pressed={muted} onClick={() => setMuted(!muted)}>{muted ? 'Sem som' : 'Som'}</button>
+          </div>
+        </div>
       ) : (
         <button type="button" className={styles.videoTrigger} onClick={() => { setFailed(false); setPlaying(true) }} aria-label={`Reproduzir vídeo: ${item.caption}`}>
           {item.poster && <Image src={item.poster} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw" placeholder="blur" className={styles.poster} />}

@@ -33,6 +33,21 @@
 .photo::after { content: ''; position: absolute; inset: 55% 0 0; background: linear-gradient(transparent, rgb(78 56 48 / 0.8)); pointer-events: none; }
 .caption { position: absolute; bottom: 18px; left: 20px; right: 20px; z-index: 1; text-align: left; font-size: 0.85rem; font-weight: 600; }
 .videoCard { position: relative; }
+.player { position: relative; }
+.playerControls {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 28px 12px 12px;
+  background: linear-gradient(transparent, rgb(0 0 0 / 0.8));
+  color: white;
+}
+.playerControls button { min-width: 44px; min-height: 44px; padding: 6px; border: 0; border-radius: 6px; background: transparent; color: inherit; font: inherit; font-size: 0.8rem; cursor: pointer; }
+.playerControls button:hover { background: rgb(255 255 255 / 0.15); }
+.playerControls input { flex: 1; min-width: 0; height: 44px; accent-color: var(--accent); cursor: pointer; }
+.playerControls :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .videoTrigger { position: relative; display: block; width: 100%; aspect-ratio: 1 / 2; padding: 0; border: 0; background: var(--sand); cursor: pointer; color: var(--cocoa-night); font: inherit; }
 .poster { object-fit: contain; }
 .play { position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%); display: grid; place-items: center; width: 58px; height: 58px; padding-left: 4px; background: var(--paper); border: 1px solid var(--line-strong); border-radius: 50%; box-shadow: var(--shadow-soft); }

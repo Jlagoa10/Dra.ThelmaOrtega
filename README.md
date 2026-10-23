@@ -33,20 +33,20 @@ src/
 
 Telefone, endereço e Instagram ficam só em `src/data/site.ts`. Textos de especialidades, etapas, FAQ e galeria ficam em `src/data/content.ts`.
 
-## Galeria: fotos, capas e v?deos
+## Galeria: fotos, capas e vídeos
 
-A galeria exibe tr?s fotos e tr?s v?deos locais. As fotos s?o exibidas diretamente na galeria; os v?deos carregam somente ao clicar na capa.
+A galeria exibe três fotos e três vídeos locais. As fotos são exibidas diretamente na galeria; os vídeos carregam somente ao clicar na capa.
 
-As fotos novas e as tr?s capas j? est?o em `src/assets/images/gallery/`.
-Salve os v?deos MP4 em `public/videos/`, com estes nomes exatos:
+As fotos novas e as três capas já estão em `src/assets/images/gallery/`.
+Salve os vídeos MP4 em `public/videos/`, com estes nomes exatos:
 
-| V?deo | Arquivo |
+| Vídeo | Arquivo |
 | --- | --- |
-| Cirurgia pl?stica | `cirurgia-plastica.mp4` |
+| Cirurgia plástica | `cirurgia-plastica.mp4` |
 | Acompanhamento hospitalar | `acompanhamento-hospitalar.mp4` |
-| Benef?cio do laser terap?utico | `laser-terapeutico.mp4` |
+| Benefício do laser terapêutico | `laser-terapeutico.mp4` |
 
-Os caminhos j? est?o configurados em `src/data/content.ts`. N?o ? necess?rio alterar c?digo ap?s adicionar os v?deos. Use MP4 com v?deo H.264 e ?udio AAC para compatibilidade com navegadores.
+Os caminhos já estão configurados em `src/data/content.ts`. Não é necessário alterar código após adicionar os vídeos. Use MP4 com vídeo H.264 e áudio AAC para compatibilidade com navegadores.
 
 ## Publicação na Vercel
 
@@ -67,12 +67,37 @@ Com o repositório conectado, cada push em `main` gera um deploy de produção (
 
 **Previews protegidos:** por padrão, a Vercel pode exigir login nos deploys de preview (Settings → Deployment Protection → Vercel Authentication). Para enviar um link de preview à cliente, desative essa proteção para previews ou use o endereço de produção `*.vercel.app`, que é público.
 
+## Publicação na Hostinger (Node.js)
+
+O site roda com o servidor do próprio Next.js (`next start`), sem export estático. Os cabeçalhos de segurança de `next.config.ts` (CSP, `X-Frame-Options`, `nosniff`, `Referrer-Policy`, `Permissions-Policy` e, fora da Vercel, HSTS) e a otimização de imagens funcionam sem configuração extra.
+
+**Configuração do app Node.js no painel da Hostinger:**
+
+| Campo | Valor |
+| --- | --- |
+| Versão do Node.js | 22 ou 24 (mínimo 20.9) |
+| Comando de instalação | `npm install` |
+| Comando de build | `npm run build` |
+| Comando de início | `npm run start` |
+| Variável de ambiente | `NEXT_PUBLIC_SITE_URL=https://seudominio.com.br` |
+
+`npm run start` usa a porta da variável `PORT`, que a Hostinger define. Não é preciso fixar a porta.
+
+**Antes de apontar o domínio:**
+
+1. **`NEXT_PUBLIC_SITE_URL` é obrigatória fora da Vercel.** Ela é lida durante o build. Sem ela, canonical, Open Graph, sitemap e Schema.org apontam para `http://localhost:3000` e o site fica bloqueado para buscadores. Cadastre a variável antes do primeiro build. Se mudar o domínio, faça um novo build.
+2. **HTTPS:** ative o certificado SSL do domínio no painel e o redirecionamento de `http://` para `https://`. O site envia HSTS, então depois da primeira visita o navegador passa a usar HTTPS sozinho. Só funciona com o SSL ativo.
+3. **Conferir depois do deploy:** a resposta do domínio precisa trazer os cabeçalhos de segurança:
+   ```bash
+   curl -I https://seudominio.com.br/
+   ```
+
 ## Variáveis de ambiente
 
-Nenhuma variável é obrigatória. A Vercel já fornece `VERCEL_ENV`, `VERCEL_URL`, `VERCEL_BRANCH_URL` e `VERCEL_PROJECT_PRODUCTION_URL`, usadas para montar canonical, Open Graph, sitemap e Schema.org com o endereço do próprio deploy.
+Na Vercel, nenhuma variável é obrigatória; na Hostinger, `NEXT_PUBLIC_SITE_URL` é (ver acima). A Vercel já fornece `VERCEL_ENV`, `VERCEL_URL`, `VERCEL_BRANCH_URL` e `VERCEL_PROJECT_PRODUCTION_URL`, usadas para montar canonical, Open Graph, sitemap e Schema.org com o endereço do próprio deploy.
 
 | Variável | Obrigatória | Para que serve |
 | --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Não | Domínio definitivo, com `https://` e sem barra no final. Quando definida, passa a ser a URL oficial do site **e libera a indexação pelos buscadores**. |
+| `NEXT_PUBLIC_SITE_URL` | Só fora da Vercel | Domínio definitivo, com `https://` e sem barra no final. Quando definida, passa a ser a URL oficial do site **e libera a indexação pelos buscadores**. |
 
 Enquanto `NEXT_PUBLIC_SITE_URL` não existir, o site é tratado como preview: envia `noindex` e o `robots.txt` bloqueia rastreadores, para o endereço provisório não competir no Google com o domínio final. Ao configurar o domínio definitivo, cadastre a variável em Settings → Environment Variables (ambiente Production) e faça um novo deploy.

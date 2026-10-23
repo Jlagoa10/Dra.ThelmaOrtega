@@ -24,7 +24,11 @@ const contentSecurityPolicy = [
   'upgrade-insecure-requests',
 ].join('; ')
 
+// A Vercel já envia HSTS; fora dela (ex.: Hostinger com Node.js) o próprio site envia.
+const hsts = process.env.VERCEL ? [] : [{ key: 'Strict-Transport-Security', value: 'max-age=63072000' }]
+
 const securityHeaders = [
+  ...hsts,
   { key: 'Content-Security-Policy', value: contentSecurityPolicy },
   { key: 'X-Frame-Options', value: 'DENY' },
   { key: 'X-Content-Type-Options', value: 'nosniff' },

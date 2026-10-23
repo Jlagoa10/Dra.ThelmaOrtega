@@ -1,5 +1,12 @@
 import type { StaticImageData } from 'next/image'
 import portrait from '@/assets/images/dra-thelma-ortega.webp'
+import preparation from '@/assets/images/gallery/thelma-preparando-atendimento.png'
+import office from '@/assets/images/gallery/consultorio.png'
+import hospital from '@/assets/images/gallery/rotina-hospitalar.jpg'
+import rest from '@/assets/images/gallery/tempo-de-repouso.jpg'
+import surgeryCover from '@/assets/images/gallery/cirurgia-plastica.png'
+import hospitalCover from '@/assets/images/gallery/acompanhamento-hospitalar.png'
+import laserCover from '@/assets/images/gallery/laser-terapeutico.png'
 import type { IconName } from '@/components/Icon'
 import { whatsappUrl } from '@/lib/links'
 
@@ -30,9 +37,9 @@ export const specialties: Specialty[] = [
     link: { href: '#pos-operatorio', label: 'Entender o processo' },
   },
   {
-    title: 'Fisioterapia Oncológica',
+    title: 'Fisioterapia Oncológica com foco em Câncer de Mama',
     kicker: 'Durante e após o tratamento',
-    text: 'Atendimento voltado às necessidades funcionais e ao cuidado da mulher durante e após tratamentos oncológicos.',
+    text: 'Atendimento voltado às necessidades funcionais e ao cuidado da mulher durante e após cirurgia oncológica das mamas.',
     icon: 'ribbon',
     link: {
       href: whatsappUrl('Olá, Dra. Thelma! Gostaria de saber mais sobre a fisioterapia oncológica.'),
@@ -41,7 +48,7 @@ export const specialties: Specialty[] = [
     },
   },
   {
-    title: 'Pós-parto',
+    title: 'Fisioterapia na Recuperação Pós-Parto',
     kicker: 'Após o nascimento',
     text: 'Um olhar individualizado para as mudanças do corpo e as necessidades funcionais do período pós-parto.',
     icon: 'motherhood',
@@ -92,16 +99,16 @@ export const steps = [
 
 export type GalleryItem = {
   caption: string
-  /** Sem imagem, o item aparece como espaço reservado até a foto ser enviada. */
+  text?: string
+  icon?: IconName
+  videoUrl?: string
+  poster?: StaticImageData
   image?: StaticImageData
   alt?: string
   position?: string
 }
 
-/**
- * Para trocar um espaço reservado por uma foto: coloque o arquivo em
- * src/assets/images, importe-o no topo deste arquivo e preencha `image` e `alt`.
- */
+/** Vídeos locais em public/videos; capas e fotos em src/assets/images/gallery. */
 export const gallery: GalleryItem[] = [
   {
     caption: 'Dra. Thelma Ortega no consultório',
@@ -109,16 +116,16 @@ export const gallery: GalleryItem[] = [
     alt: 'Dra. Thelma Ortega de uniforme branco no consultório, com macas e plantas ao fundo',
     position: '50% 18%',
   },
-  { caption: 'Consultório' },
-  { caption: 'Atendimento' },
-  { caption: 'Detalhes do espaço' },
-  { caption: 'Equipe' },
-  { caption: 'Rotina de cuidado' },
+  { caption: 'Rotina hospitalar', image: hospital, alt: 'Registro de profissionais em ambiente hospitalar' },
+  { caption: 'Tempo médio de repouso', image: rest, alt: 'Infográfico sobre o tempo médio de repouso após diferentes procedimentos', text: 'Os períodos apresentados são referências gerais. Siga as orientações da equipe médica para o seu caso.' },
+  { caption: 'Cirurgia plástica', videoUrl: '/videos/cirurgia-plastica.mp4', poster: surgeryCover },
+  { caption: 'Acompanhamento hospitalar', videoUrl: '/videos/acompanhamento-hospitalar.mp4', poster: hospitalCover },
+  { caption: 'Benefício do laser terapêutico', videoUrl: '/videos/laser-terapeutico.mp4', poster: laserCover },
 ]
 
 export const environment: { main: GalleryItem; detail: GalleryItem } = {
-  main: { caption: 'Consultório' },
-  detail: { caption: 'Equipe' },
+  main: { caption: 'Dra. Thelma Ortega', image: preparation, alt: 'Thelma preparando uma toalha sobre a maca de atendimento', position: '50% 50%' },
+  detail: { caption: 'Cuidado individualizado', image: office, alt: 'Ambiente de atendimento com maca, móveis de madeira e iluminação natural', position: '30% 65%' },
 }
 
 export const faq = [
@@ -130,7 +137,7 @@ export const faq = [
   {
     question: 'Para quais tipos de cirurgia existe acompanhamento?',
     answer:
-      'O acompanhamento é voltado ao pós-operatório de cirurgias plásticas, à reconstrução mamária e a cirurgias relacionadas a tratamentos oncológicos. A indicação para cada caso é definida na avaliação, em conjunto com as orientações da equipe médica.',
+      'O acompanhamento é voltado ao pós-operatório de cirurgias plásticas e cirurgia oncológica mamária. A indicação para cada caso é definida na avaliação, em conjunto com as orientações da equipe médica.',
   },
   {
     question: 'Como funciona a primeira avaliação?',

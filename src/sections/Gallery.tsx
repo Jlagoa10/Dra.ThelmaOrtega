@@ -3,8 +3,6 @@ import { gallery } from '@/data/content'
 import styles from './Gallery.module.css'
 
 export function Gallery() {
-  const hasPhotos = gallery.some((item) => item.image)
-
   return (
     <section id="galeria" className={`section ${styles.gallery}`} aria-labelledby="galeria-title">
       <div className="wrap">
@@ -15,7 +13,6 @@ export function Gallery() {
               Um pouco do dia a dia
             </h2>
           </div>
-          {hasPhotos && <p className={styles.hint}>Toque em uma foto para ampliar.</p>}
         </header>
 
         <GalleryGrid items={gallery} />

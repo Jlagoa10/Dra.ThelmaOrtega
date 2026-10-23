@@ -6,7 +6,7 @@ import { Header } from '@/components/Header'
 import { RevealObserver } from '@/components/RevealObserver'
 import { WhatsAppFloat } from '@/components/WhatsAppFloat'
 import { site } from '@/data/site'
-import { localBusinessJsonLd, siteUrl } from '@/lib/seo'
+import { allowIndexing, localBusinessJsonLd, siteUrl } from '@/lib/seo'
 import { Footer } from '@/sections/Footer'
 
 const manrope = Manrope({
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: site.title,
     description: site.description,
   },
-  robots: { index: true, follow: true },
+  robots: allowIndexing ? { index: true, follow: true } : { index: false, follow: false },
   formatDetection: { telephone: false, address: false, email: false },
   other: {
     'geo.region': 'BR-SP',

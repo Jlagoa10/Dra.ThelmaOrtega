@@ -1,9 +1,9 @@
 import Image from 'next/image'
-import { PhotoPlaceholder } from '@/components/PhotoPlaceholder'
+import { Icon } from '@/components/Icon'
 import { environment, type GalleryItem } from '@/data/content'
 import styles from './Environment.module.css'
 
-function Media({ item, className, sizes }: { item: GalleryItem; className: string; sizes: string }) {
+function Media({ item, className, sizes, showCaption = false }: { item: GalleryItem; className: string; sizes: string; showCaption?: boolean }) {
   return (
     <div className={className}>
       {item.image ? (
@@ -17,8 +17,13 @@ function Media({ item, className, sizes }: { item: GalleryItem; className: strin
           style={{ objectPosition: item.position }}
         />
       ) : (
-        <PhotoPlaceholder label={item.caption} />
+        <div className={styles.careCard}>
+          <Icon name={item.icon ?? 'heart'} size={28} />
+          <strong>{item.caption}</strong>
+          <p>{item.text}</p>
+        </div>
       )}
+      {item.image && showCaption && <span className={styles.imageCaption}>{item.caption}</span>}
     </div>
   )
 }
@@ -29,11 +34,11 @@ export function Environment() {
       <div className={`wrap ${styles.grid}`}>
         <div className={styles.composition} data-reveal="scale">
           <Media item={environment.main} className={styles.main} sizes="(max-width: 900px) 80vw, 45vw" />
-          <Media item={environment.detail} className={styles.detail} sizes="(max-width: 900px) 45vw, 22vw" />
+          <Media item={environment.detail} className={styles.detail} sizes="(max-width: 900px) 45vw, 22vw" showCaption />
         </div>
 
         <div className={styles.copy} data-reveal>
-          <span className="eyebrow">Ambiente</span>
+          <span className="eyebrow">Meu jeito de cuidar</span>
           <h2 id="ambiente-title" className="title">
             Experiência, cuidado e atenção em cada <em className="script">etapa.</em>
           </h2>

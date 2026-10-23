@@ -12,8 +12,8 @@ export function Footer() {
         <div className={styles.grid}>
           <div className={styles.brandCol}>
             <a className={styles.brand} href="#inicio">
-              <span className={styles.brandName}>{site.name}</span>
-              <span className={styles.brandRole}>Fisioterapia</span>
+              <span className={styles.brandName}>{site.professional}</span>
+              <span className={styles.brandRole}>Fisioterapeuta</span>
             </a>
             <p className={styles.tagline}>{site.tagline}</p>
           </div>
@@ -64,7 +64,19 @@ export function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <p>© {new Date().getFullYear()} {site.name}. Todos os direitos reservados.</p>
+          <div className={styles.legal}>
+            <p>© {new Date().getFullYear()} {site.name}. Todos os direitos reservados.</p>
+            <span className={styles.separator} aria-hidden="true">
+              ·
+            </span>
+            <p>
+              Feito por{' '}
+              <a className={styles.credit} href="https://jlkoficial.com" target="_blank" rel="noopener noreferrer">
+                JLK Web &amp; Digital Services
+                <span className="sr-only"> (abre em nova aba)</span>
+              </a>
+            </p>
+          </div>
           <a className={styles.top} href="#inicio">
             Voltar ao topo
             <Icon name="arrowUp" size={16} />

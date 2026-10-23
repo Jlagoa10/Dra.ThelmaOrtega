@@ -2,9 +2,9 @@ export const site = {
   name: 'Dra. Thelma Ortega',
   professional: 'Thelma Ortega',
   tagline: 'Fisioterapia Pós-Operatória | Oncológica | Pós-Parto',
-  title: 'Dra. Thelma Ortega | Fisioterapia Pós-Operatória, Oncológica e Pós-Parto',
+  title: 'Fisioterapia Pós-Operatória em São Bernardo do Campo | Dra. Thelma Ortega',
   description:
-    'Fisioterapia pós-operatória, oncológica e pós-parto em São Bernardo do Campo - SP. Cuidado individualizado para a mulher em cada fase da recuperação.',
+    'Fisioterapia no pós-operatório de cirurgias plásticas, oncológica (câncer de mama) e pós-parto no Centro de São Bernardo do Campo, no ABC. Agende sua avaliação.',
   positioning:
     'Fisioterapia no cuidado da mulher em momentos de transformação: pós-operatório de cirurgias plásticas, reconstrução mamária e tratamentos oncológicos, além do período pós-parto. Atendimento com foco em segurança, funcionalidade, recuperação da autoestima e qualidade de vida, respeitando cada fase do processo de recuperação.',
   phone: {
@@ -18,13 +18,15 @@ export const site = {
     url: 'https://www.instagram.com/thelmaortega.fisioterapia/',
   },
   address: {
-    street: 'Rua José Bonifacio, 598',
+    street: 'Rua José Bonifácio, 598',
     district: 'Centro',
     city: 'São Bernardo do Campo',
     state: 'SP',
     postalCode: '09721-161',
     country: 'BR',
   },
+  /** Cidades atendidas além de São Bernardo do Campo (dados estruturados e FAQ). */
+  serviceArea: ['Santo André', 'São Caetano do Sul', 'Diadema', 'zona sul de São Paulo'],
 } as const
 
 export const navLinks = [

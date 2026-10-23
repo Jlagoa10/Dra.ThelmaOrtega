@@ -1,3 +1,4 @@
+import { faq } from '@/data/content'
 import { site } from '@/data/site'
 import { mapsUrl } from '@/lib/links'
 
@@ -28,9 +29,17 @@ export const siteUrl = resolveSiteUrl().replace(/\/$/, '')
  */
 export const allowIndexing = Boolean(process.env.NEXT_PUBLIC_SITE_URL)
 
-export function localBusinessJsonLd(imagePath: string) {
+/** Serviços que aparecem no site; entram no catálogo do Schema.org. */
+const services = [
+  'Fisioterapia no pós-operatório de cirurgias plásticas',
+  'Fisioterapia oncológica com foco em câncer de mama',
+  'Fisioterapia na recuperação pós-parto',
+  'Laser terapêutico',
+  'Acompanhamento hospitalar no pós-operatório',
+]
+
+function localBusiness(imagePath: string) {
   return {
-    '@context': 'https://schema.org',
     '@type': 'Physiotherapy',
     '@id': `${siteUrl}/#fisioterapia`,
     name: site.name,
@@ -46,14 +55,51 @@ export function localBusinessJsonLd(imagePath: string) {
       postalCode: site.address.postalCode,
       addressCountry: site.address.country,
     },
-    areaServed: { '@type': 'City', name: site.address.city },
+    areaServed: [
+      { '@type': 'City', name: site.address.city },
+      ...site.serviceArea.map((name) => ({ '@type': 'Place', name })),
+    ],
     hasMap: mapsUrl,
     sameAs: [site.instagram.url],
-    knowsAbout: ['Fisioterapia pós-operatória', 'Fisioterapia oncológica', 'Fisioterapia pós-parto'],
+    knowsAbout: [
+      'Fisioterapia pós-operatória',
+      'Pós-operatório de cirurgia plástica',
+      'Fisioterapia oncológica',
+      'Câncer de mama',
+      'Fisioterapia pós-parto',
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Atendimentos de fisioterapia',
+      itemListElement: services.map((name) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name },
+      })),
+    },
     employee: {
       '@type': 'Person',
       name: site.professional,
       jobTitle: 'Fisioterapeuta',
     },
+  }
+}
+
+function faqPage() {
+  return {
+    '@type': 'FAQPage',
+    '@id': `${siteUrl}/#duvidas`,
+    mainEntity: faq.map(({ question, answer }) => ({
+      '@type': 'Question',
+      name: question,
+      acceptedAnswer: { '@type': 'Answer', text: answer },
+    })),
+  }
+}
+
+/** Dados estruturados da página: o consultório (negócio local) e as dúvidas frequentes. */
+export function structuredData(imagePath: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [localBusiness(imagePath), faqPage()],
   }
 }

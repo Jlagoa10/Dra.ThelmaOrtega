@@ -152,6 +152,11 @@ export const faq = [
   {
     question: 'O atendimento é em São Bernardo do Campo?',
     answer:
-      'Sim. O atendimento acontece na Rua José Bonifacio, 598, no Centro de São Bernardo do Campo - SP. O mapa e o caminho estão na seção de localização.',
+      'Sim. O atendimento acontece na Rua José Bonifácio, 598, no Centro de São Bernardo do Campo - SP. O mapa e o caminho estão na seção de localização.',
+  },
+  {
+    question: 'Atende pacientes de outras cidades do ABC?',
+    answer:
+      'Sim. O consultório recebe pacientes de São Bernardo do Campo, Santo André, São Caetano do Sul, Diadema e da zona sul de São Paulo. O atendimento é em horário comercial, com consulta agendada previamente pelo WhatsApp.',
   },
 ]

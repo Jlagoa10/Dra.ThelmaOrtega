@@ -6,7 +6,7 @@ import { Header } from '@/components/Header'
 import { RevealObserver } from '@/components/RevealObserver'
 import { WhatsAppFloat } from '@/components/WhatsAppFloat'
 import { site } from '@/data/site'
-import { allowIndexing, localBusinessJsonLd, siteUrl } from '@/lib/seo'
+import { allowIndexing, siteUrl, structuredData } from '@/lib/seo'
 import { Footer } from '@/sections/Footer'
 
 const manrope = Manrope({
@@ -55,7 +55,7 @@ export const viewport: Viewport = {
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const jsonLd = JSON.stringify(localBusinessJsonLd(portrait.src)).replace(/</g, '\\u003c')
+  const jsonLd = JSON.stringify(structuredData(portrait.src)).replace(/</g, '\\u003c')
 
   return (
     <html lang="pt-BR" data-scroll-behavior="smooth" className={`${manrope.variable} ${italianno.variable}`}>

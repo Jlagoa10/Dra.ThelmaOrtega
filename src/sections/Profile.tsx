@@ -4,7 +4,8 @@ import { profile } from '@/data/content'
 import styles from './Profile.module.css'
 
 export function Profile() {
-  const [intro, highlight, closing] = profile.paragraphs
+  const body = profile.paragraphs.slice(0, -1)
+  const highlight = profile.paragraphs.at(-1)
 
   return (
     <section id="perfil" className={`section ${styles.profile}`} aria-labelledby="perfil-title">
@@ -29,9 +30,10 @@ export function Profile() {
           <h2 id="perfil-title" className={styles.title}>
             Quem sou eu?
           </h2>
-          <p>{intro}</p>
+          {body.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
           <p className={styles.highlight}>{highlight}</p>
-          <p>{closing}</p>
 
           <ul className={styles.pillars} aria-label="Pilares do atendimento">
             {profile.pillars.map((pillar, index) => (

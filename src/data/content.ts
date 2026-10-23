@@ -5,9 +5,10 @@ import { whatsappUrl } from '@/lib/links'
 
 export const profile = {
   paragraphs: [
-    'Sou Dra. Thelma Ortega, fisioterapeuta com atuação voltada ao cuidado da mulher no pós-operatório, na fisioterapia oncológica e no período pós-parto.',
-    'Meu trabalho é acompanhar cada paciente de forma individualizada, com um cuidado seguro e humanizado, focado em funcionalidade, conforto e qualidade de vida.',
-    'Cada processo é único. Por isso, a avaliação e o acompanhamento são personalizados para que o tratamento faça sentido para você.',
+    'Sou a Dra. Thelma Ortega, fisioterapeuta especializada no acompanhamento pós-operatório de cirurgias plásticas.',
+    'Uno conhecimento técnico, avaliação criteriosa e cuidado humanizado para oferecer um acompanhamento individualizado, respeitando as necessidades de cada paciente e a evolução de sua recuperação.',
+    'Meu compromisso é proporcionar um cuidado fisioterapêutico responsável, seguro e integrado à equipe médica, com atenção à funcionalidade, ao conforto e à qualidade de vida.',
+    'Cuidar da recuperação é respeitar cada etapa, compreender cada necessidade e reconhecer a individualidade de cada paciente.',
   ],
   pillars: ['Cuidado individualizado', 'Segurança', 'Funcionalidade', 'Qualidade de vida'],
 }
